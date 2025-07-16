@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace Schoolmanagement.Domain.Entities
 {
-    public class TeacherSubject
+    public class SubjectTeacher
     {
         [Required]
         public string TeacherId { get; set; } = null!;
 
         [Required]
-        public string SubjectId { get; set; } = null!;
+        public Guid SubjectId { get; set; }
 
         [ForeignKey(nameof(TeacherId))]
         public virtual Teacher Teacher { get; set; } = null!;

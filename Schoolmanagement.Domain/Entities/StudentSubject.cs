@@ -14,7 +14,7 @@ namespace Schoolmanagement.Domain.Entities
         public string StudentId { get; set; } = null!;
         
         [Required]
-        public string SubjectId { get; set; } = null!;
+        public Guid SubjectId { get; set; }
 
         [ForeignKey(nameof(StudentId))]
         public virtual Student Student { get; set; } = null!;

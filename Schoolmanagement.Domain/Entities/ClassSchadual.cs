@@ -11,10 +11,10 @@ namespace Schoolmanagement.Domain.Entities
     public class ClassSchadual
     {
         [Required]
-        public string ClassId { get; set; } = null!;
+        public Guid ClassId { get; set; }
 
         [Required]
-        public string SubjectId { get; set; } = null!;
+        public Guid SubjectId { get; set; }
 
         [Required]
         public string TeacherId { get; set; } = null!;

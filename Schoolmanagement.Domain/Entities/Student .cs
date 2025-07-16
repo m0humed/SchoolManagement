@@ -35,7 +35,7 @@ namespace Schoolmanagement.Domain.Entities
         [Phone]
         [Display(Name = "Family phone")]
         public string Phone { get; set; } = null!;
-        public string ClassId { get; set; } = null!;
+        public Guid ClassId { get; set; }
         [ForeignKey("ClassId")]
         public virtual Class Class { get; set; } = null!;
         
