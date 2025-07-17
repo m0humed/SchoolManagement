@@ -6,7 +6,14 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Service.IServices
 {
-    internal interface IService
+    public interface IService<TEntity , ID>
+        where TEntity : class
     {
+        Task<TEntity> GetByIdAsync(ID id);
+        Task<IEnumerable<TEntity>> GetAllAsync();
+        Task AddAsync(TEntity entity);
+        Task UpdateAsync(TEntity entity);
+        Task DeleteAsync(ID id);
+        Task<bool> ExistsAsync(ID id);
     }
 }

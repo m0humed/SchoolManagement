@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Infrastructure.IRepositories
 {
-    public interface IRepository<TEntity>
+    public interface IRepository<TEntity , ID>
     where TEntity : class
     {
-        Task<TEntity> GetByIdAsync(Guid id);
+        Task<TEntity> GetByIdAsync(ID id);
         Task<IEnumerable<TEntity>> GetAllAsync();
         Task AddAsync(TEntity entity);
         Task UpdateAsync(TEntity entity);
-        Task DeleteAsync(Guid id);
-        Task<bool> ExistsAsync(Guid id);
+        Task DeleteAsync(ID id);
+        Task<bool> ExistsAsync(ID id);
     }
 }

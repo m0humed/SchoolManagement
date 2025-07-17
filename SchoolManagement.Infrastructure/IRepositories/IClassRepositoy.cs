@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace SchoolManagement.Infrastructure.IRepositories
 {
-    public interface IClassRepositoy : IRepository<Class>
+    public interface IClassRepositoy : IRepository<Class,Guid>
     {
 
     }
