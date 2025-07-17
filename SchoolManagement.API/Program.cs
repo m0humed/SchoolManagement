@@ -1,5 +1,6 @@
-
+﻿
 using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Infrastructure;
 using SchoolManagement.Infrastructure.Data;
 namespace SchoolManagement.API
 {
@@ -26,15 +27,27 @@ namespace SchoolManagement.API
 
             // Add db context
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseSqlServer(builder.Configuration.GetConnectionString("local")));
+                options.UseSqlServer(builder.Configuration.GetConnectionString("local"))
+                .UseLazyLoadingProxies());
+
+            // Add infrastructure dependencies
+            builder.Services.AddInfrastructureDependancies();
+
+            // Add Swagger UI for browser-based API testing
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen();
+
 
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
-                app.MapOpenApi();
+                app.MapOpenApi();  // For OpenAPI endpoints
+                app.UseSwagger();
+                app.UseSwaggerUI();    //  ADD THIS for browser-based UI
             }
+
 
             app.UseHttpsRedirection();
 
@@ -43,6 +56,9 @@ namespace SchoolManagement.API
 
             app.MapControllers();
 
+            // Add a simple health check endpoint
+            app.MapGet("/", () => Results.Ok("School Management API is running."));
+            
             app.Run();
         }
     }
