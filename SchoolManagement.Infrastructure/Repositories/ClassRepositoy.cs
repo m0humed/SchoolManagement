@@ -30,11 +30,13 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 throw new ArgumentNullException(nameof(entity), "Class entity cannot be null.");
             }
-            if (entity.Id == Guid.Empty)
+            if (entity.Id == Guid.Empty || DbContext.Classes.Any(x=>x.Id==entity.Id))
             {
                 entity.Id = Guid.NewGuid();
             }
+
             await DbContext.Classes.AddAsync(entity);
+            await DbContext.SaveChangesAsync();
         }
 
         public async Task DeleteAsync(Guid id)
@@ -48,6 +50,7 @@ namespace SchoolManagement.Infrastructure.Repositories
                 throw new KeyNotFoundException($"Class with ID {id} not found.");
             }
             await Task.Run(() => DbContext.Classes.Remove(entity));
+            await DbContext.SaveChangesAsync();
 
         }
 

@@ -1,5 +1,6 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
+using SchoolManagement.Core;
 using SchoolManagement.Infrastructure;
 using SchoolManagement.Infrastructure.Data;
 using SchoolManagement.Service;
@@ -29,14 +30,15 @@ namespace SchoolManagement.API
             // Add db context
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("local"))
-                .UseLazyLoadingProxies());
+                );
             
             #region Depandancies injections
             // Add infrastructure dependencies
             builder.Services.AddInfrastructureDependancies();
             builder.Services.AddServiceDependancies();
+            builder.Services.AddCoreDependancies();
             #endregion
-           
+
             // Add Swagger UI for browser-based API testing
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
