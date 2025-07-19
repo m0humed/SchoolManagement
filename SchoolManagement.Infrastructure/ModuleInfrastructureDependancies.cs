@@ -15,6 +15,7 @@ namespace SchoolManagement.Infrastructure
         {
             // Register your repositories and other infrastructure services here
             services.AddScoped<IClassRepositoy, ClassRepositoy>();
+            services.AddScoped<ISubjectRepository, SubjectRepository>();
             // services.AddScoped<IStudentRepository, StudentRepository>();
             // services.AddScoped<IUnitOfWork, UnitOfWork>();
             // services.AddDbContext<SchoolManagementDbContext>(options => 

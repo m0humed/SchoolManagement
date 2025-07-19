@@ -9,7 +9,7 @@ namespace SchoolManagement.Service
         public static IServiceCollection AddServiceDependancies(this IServiceCollection services)
         {
             services.AddScoped<IClassService , ClassService>();
-
+            services.AddScoped<ISubjectService , SubjectService>();
             return services;
         }
 

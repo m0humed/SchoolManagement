@@ -30,7 +30,7 @@ namespace SchoolManagement.API
             // Add db context
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("local"))
-                );
+                .UseLazyLoadingProxies());
             
             #region Depandancies injections
             // Add infrastructure dependencies
