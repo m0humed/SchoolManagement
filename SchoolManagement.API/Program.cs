@@ -62,8 +62,8 @@ namespace SchoolManagement.API
 
             app.MapControllers();
 
-            // Add a simple health check endpoint
-            app.MapGet("/", () => Results.Ok("School Management API is running."));
+            ////Add a simple health check endpoint
+            //app.MapGet("/", () => Results.Ok("School Management API is running."));
             
             app.Run();
         }

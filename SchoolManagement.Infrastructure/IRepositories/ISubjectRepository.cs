@@ -11,5 +11,6 @@ namespace SchoolManagement.Infrastructure.IRepositories
     public interface ISubjectRepository:IRepository<Subject,Guid>
     {
         Task<Grades> Grade(int degree);
+
     }
 }

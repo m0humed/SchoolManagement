@@ -13,7 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Mapping\" />
+    <Folder Include="Mapping\Class\" />
+    <Folder Include="Mapping\Subject\CommandMapping\" />
   </ItemGroup>
 
   <ItemGroup>

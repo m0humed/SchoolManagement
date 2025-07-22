@@ -15,7 +15,6 @@ namespace SchoolManagement.Core
 
             #region inject AutomMapper
             services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly());
-
             #endregion
             return services;
         }

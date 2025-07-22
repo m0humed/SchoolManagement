@@ -10,6 +10,7 @@ namespace Schoolmanagement.Domain.Entities
     public class Teacher
     {
         [Key]
+        [Required]
         public string ssn { get; set; }
         [Required]
         [MaxLength(50)]

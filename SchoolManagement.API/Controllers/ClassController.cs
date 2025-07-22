@@ -1,9 +1,9 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Schoolmanagement.Domain.Entities;
 using SchoolManagement.Core.Features.Class.Commands;
 using SchoolManagement.Core.Features.Class.Queries;
+using Microsoft.AspNetCore.Http;
 
 namespace SchoolManagement.API.Controllers
 {
@@ -11,8 +11,8 @@ namespace SchoolManagement.API.Controllers
     [ApiController]
     public class ClassController : ControllerBase
     {
-        private readonly IMediator _mediator;
         #region Fields
+        private readonly IMediator _mediator;
 
         #endregion
 
@@ -22,10 +22,8 @@ namespace SchoolManagement.API.Controllers
             this._mediator = mediator;
         }
 
-        #endregion
-
-        #region Actions
         [HttpPost]
+        [Route("AddClass")]
         public async Task<IActionResult> CreateClass([FromBody] Class command)
         {
             if (command == null)
@@ -45,6 +43,7 @@ namespace SchoolManagement.API.Controllers
         }
 
         [HttpGet]
+        [Route("GetAllClasses")]
         public async Task<IActionResult> GetAllClasses()
         {
             try
