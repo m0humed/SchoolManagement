@@ -4,7 +4,7 @@ namespace SchoolManagement.Core.Features.Teachers.Results
 {
     public class GetTeachersPaginateResult
     {
-        public string FullName = null!;
+        public string FullName { get; set; } = null!;
 
         [EmailAddress]
         public string Email { get; set; } = null!;

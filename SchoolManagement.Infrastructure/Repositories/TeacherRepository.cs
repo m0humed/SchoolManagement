@@ -68,6 +68,11 @@ namespace SchoolManagement.Infrastructure.Repositories
             return await _dbContext.Teachers.ToListAsync();
         }
 
+        public IQueryable<Teacher> GetAllByQuerable()
+        {
+            return _dbContext.Teachers.AsNoTracking().AsQueryable();
+        }
+
         public async Task<Teacher> GetByIdAsync(string id)
         {
             if (!await ExistsAsync(id))

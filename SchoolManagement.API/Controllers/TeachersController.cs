@@ -62,8 +62,8 @@ namespace SchoolManagement.API.Controllers
             return NewResult(result);
         }
 
-        [HttpPost("Pagenated")]
-        public async Task<IActionResult> pagenatedlist([FromBody] GetTeachersPaginateQuery query)
+        [HttpGet("Pagenated")]
+        public async Task<IActionResult> pagenatedlist([FromQuery] GetTeachersPaginateQuery query)
         {
             if (query == null) return BadRequest();
 

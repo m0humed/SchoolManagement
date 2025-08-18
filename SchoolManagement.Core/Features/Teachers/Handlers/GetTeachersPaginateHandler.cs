@@ -24,10 +24,20 @@ namespace SchoolManagement.Core.Features.Teachers.Handlers
         public async Task<PaginationResult<GetTeachersPaginateResult>> Handle(GetTeachersPaginateQuery request, CancellationToken cancellationToken)
         {
             if (request == null) throw new ArgumentNullException(nameof(request));
-            var Result = (await _teacherService.GetAllAsync());
-
+            var Result = _teacherService.GetAllQuerable();
 
             if (Result == null) throw new ArgumentNullException("null");
+
+            if (request.Search != null)
+            {
+                Result = _teacherService.FilterSearchinQuerable(request.Search);
+            }
+            if (request.OrderBy != null)
+            {
+                Result = _teacherService.OrderTeachers(request.OrderBy, Result);
+            }
+
+
             var mappedResult = _mapper.Map<List<GetTeachersPaginateResult>>(Result);
 
             var Pagenated = await mappedResult.AsQueryable().PaginationExtinsionAsync(request.PageNumber, request.PageSize);
