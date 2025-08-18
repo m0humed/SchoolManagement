@@ -1,15 +1,10 @@
 ﻿using Schoolmanagement.Domain.Entities;
 using SchoolManagement.Infrastructure.IRepositories;
 using SchoolManagement.Service.IServices;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Service.Services
 {
-    internal class ClassService: IClassService
+    internal class ClassService : IClassService
     {
         #region Fields
         private readonly IClassRepositoy _classRepositoy;
@@ -33,6 +28,15 @@ namespace SchoolManagement.Service.Services
         {
             return await _classRepositoy.ExistsAsync(id);
         }
+
+        public async Task<bool> ExistsByStageAndClassNumberAsync(byte Stage, byte ClassNumber, Guid Id)
+        {
+            var classesList = await GetAllAsync();
+            var result = classesList.Where(x => x.ClassNumber == ClassNumber && x.Stage == Stage
+                                              && !x.Id.Equals(Id)).Any();
+            return result;
+        }
+
         public async Task<IEnumerable<Class>> GetAllAsync()
         {
             return await _classRepositoy.GetAllAsync();
@@ -42,9 +46,9 @@ namespace SchoolManagement.Service.Services
             return await _classRepositoy.GetByIdAsync(id);
         }
 
-        public Task UpdateAsync(Class entity)
+        public async Task UpdateAsync(Class entity)
         {
-            throw new NotImplementedException();
+            await _classRepositoy.UpdateAsync(entity);
         }
         #endregion
     }

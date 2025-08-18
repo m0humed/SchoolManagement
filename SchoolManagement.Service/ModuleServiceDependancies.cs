@@ -10,6 +10,7 @@ namespace SchoolManagement.Service
         {
             services.AddScoped<IClassService , ClassService>();
             services.AddScoped<ISubjectService , SubjectService>();
+            services.AddScoped<ITeacherService , TeacherService>();
             return services;
         }
 

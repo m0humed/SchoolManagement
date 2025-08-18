@@ -1,15 +1,15 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Schoolmanagement.Domain.Entities;
+using SchoolManagement.API.Base;
 using SchoolManagement.Core.Features.Class.Commands;
 using SchoolManagement.Core.Features.Class.Queries;
-using Microsoft.AspNetCore.Http;
 
 namespace SchoolManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class ClassController : ControllerBase
+    public class ClassController : AppController
     {
         #region Fields
         private readonly IMediator _mediator;
@@ -56,6 +56,13 @@ namespace SchoolManagement.API.Controllers
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
             }
+        }
+
+        [HttpPut("UpdateClass")]
+        public async Task<IActionResult> updateClass(EditClassCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return NewResult(result);
         }
 
         #endregion

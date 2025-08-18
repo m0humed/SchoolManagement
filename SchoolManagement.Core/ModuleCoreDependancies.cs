@@ -1,6 +1,8 @@
-﻿using AutoMapper;
+﻿using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using SchoolManagement.Core.Behaviors;
+using SchoolManagement.Core.Features.Teachers.Validation;
 using System.Reflection;
 
 namespace SchoolManagement.Core
@@ -15,6 +17,15 @@ namespace SchoolManagement.Core
 
             #region inject AutomMapper
             services.AddAutoMapper(cfg => { }, Assembly.GetExecutingAssembly());
+            #endregion
+
+            #region Inject Validation behavior
+            // Get Validators
+            services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
+            // 
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
+
+            services.AddValidatorsFromAssemblyContaining<AddTeacherValidator>();
             #endregion
             return services;
         }

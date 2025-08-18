@@ -1,6 +1,7 @@
 ﻿
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Core;
+using SchoolManagement.Core.Middleware;
 using SchoolManagement.Infrastructure;
 using SchoolManagement.Infrastructure.Data;
 using SchoolManagement.Service;
@@ -11,7 +12,7 @@ namespace SchoolManagement.API
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            
+
             //builder.WebHost.ConfigureKestrel(options =>
             //{
             //    options.ListenLocalhost(7298, listenOptions =>
@@ -31,7 +32,7 @@ namespace SchoolManagement.API
             builder.Services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(builder.Configuration.GetConnectionString("local"))
                 .UseLazyLoadingProxies());
-            
+
             #region Depandancies injections
             // Add infrastructure dependencies
             builder.Services.AddInfrastructureDependancies();
@@ -60,11 +61,13 @@ namespace SchoolManagement.API
             app.UseAuthorization();
 
 
+            app.UseMiddleware<ErrorHandlerMiddleware>();
+
             app.MapControllers();
 
             ////Add a simple health check endpoint
             //app.MapGet("/", () => Results.Ok("School Management API is running."));
-            
+
             app.Run();
         }
     }

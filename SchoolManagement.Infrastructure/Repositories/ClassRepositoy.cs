@@ -2,11 +2,6 @@
 using Schoolmanagement.Domain.Entities;
 using SchoolManagement.Infrastructure.Data;
 using SchoolManagement.Infrastructure.IRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Infrastructure.Repositories
 {
@@ -22,7 +17,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             DbContext = dbContext;
         }
         #endregion
-        
+
         #region Methods
         public async Task AddAsync(Class entity)
         {
@@ -30,7 +25,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 throw new ArgumentNullException(nameof(entity), "Class entity cannot be null.");
             }
-            if (entity.Id == Guid.Empty || DbContext.Classes.Any(x=>x.Id==entity.Id))
+            if (entity.Id == Guid.Empty || DbContext.Classes.Any(x => x.Id == entity.Id))
             {
                 entity.Id = Guid.NewGuid();
             }
@@ -41,7 +36,8 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task DeleteAsync(Guid id)
         {
-            if (id == Guid.Empty) {
+            if (id == Guid.Empty)
+            {
                 throw new ArgumentException("Invalid class ID.", nameof(id));
             }
             var entity = DbContext.Classes.Find(id);
@@ -56,7 +52,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public Task<bool> ExistsAsync(Guid id)
         {
-            
+
             if (id == Guid.Empty)
             {
                 throw new ArgumentException("Invalid class ID.", nameof(id));
@@ -70,14 +66,32 @@ namespace SchoolManagement.Infrastructure.Repositories
             return await DbContext.Classes.ToListAsync();
         }
 
-        public Task<Class> GetByIdAsync(Guid id)
+        public async Task<Class> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var entity = await DbContext.Classes.FirstOrDefaultAsync(x => x.Id.Equals(id));
+            if (entity == null)
+            {
+                throw new Exception("Not found Class");
+            }
+            return entity;
         }
 
-        public Task UpdateAsync(Class entity)
+        public async Task UpdateAsync(Class entity)
         {
-            throw new NotImplementedException();
+            if (entity == null)
+            {
+                throw new ArgumentNullException(nameof(entity), "Class entity cannot be null.");
+            }
+            var existingEntity = await GetByIdAsync(entity.Id);
+            if (existingEntity == null)
+            {
+                throw new KeyNotFoundException($"Class with ID {entity.Id} not found.");
+            }
+            existingEntity.Stage = entity.Stage;
+            existingEntity.ClassNumber = entity.ClassNumber;
+
+            DbContext.Classes.Update(existingEntity);
+            await DbContext.SaveChangesAsync();
         }
         #endregion
     }

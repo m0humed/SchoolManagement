@@ -27,7 +27,7 @@ namespace SchoolManagement.API.Controllers
         [Route("AddSubject")]
         public async Task<IActionResult> Addsubject([FromBody] Subject subject )
         {
-            if (subject == null) throw new ArgumentNullException(nameof(subject));
+            if (subject == null) return BadRequest("Null object");
 
             try
             {
