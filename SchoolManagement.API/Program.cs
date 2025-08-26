@@ -1,10 +1,12 @@
 ﻿
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
 using SchoolManagement.Core;
 using SchoolManagement.Core.Middleware;
 using SchoolManagement.Infrastructure;
 using SchoolManagement.Infrastructure.Data;
 using SchoolManagement.Service;
+using System.Globalization;
 namespace SchoolManagement.API
 {
     public class Program
@@ -44,6 +46,26 @@ namespace SchoolManagement.API
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddSwaggerGen();
 
+            #region Configure Localization
+            builder.Services.AddControllersWithViews();
+            builder.Services.AddLocalization(opt => { opt.ResourcesPath = string.Empty; });
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                List<CultureInfo> supportedCultures = new List<CultureInfo>
+                                {
+                                    new CultureInfo("en-US"),
+                                    new CultureInfo("de-DE"),
+                                    new CultureInfo("fr-FR"),
+                                    new CultureInfo("en-GB"),
+                                    new CultureInfo("ar-EG")
+                                };
+                options.DefaultRequestCulture = new RequestCulture("en-GB");
+                options.SupportedCultures = supportedCultures;
+                options.SupportedUICultures = supportedCultures;
+            });
+            #endregion
+
 
             var app = builder.Build();
 
@@ -54,6 +76,21 @@ namespace SchoolManagement.API
                 app.UseSwagger();
                 app.UseSwaggerUI();    //  ADD THIS for browser-based UI
             }
+            #region Configure Localization
+            ////it doesn't work
+            //app.UseRequestLocalization(options =>
+            //{
+            //    var questStringCultureProvider = options.RequestCultureProviders[0];
+            //    options.RequestCultureProviders.RemoveAt(0);
+            //    options.RequestCultureProviders.Insert(1, questStringCultureProvider);
+            //});
+
+            var localizationOptions = app.Services.GetRequiredService<Microsoft.Extensions.Options.IOptions<RequestLocalizationOptions>>().Value;
+            app.UseRequestLocalization(localizationOptions);
+
+            #endregion
+
+
 
 
             app.UseHttpsRedirection();

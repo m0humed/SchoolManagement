@@ -52,7 +52,11 @@ namespace SchoolManagement.API.Controllers
         [HttpGet("GetBySSN/{ssn}")]
         public async Task<IActionResult> GetBySSN(string ssn)
         {
-            return Ok();
+
+            var result = await _mediator.Send(new GetTeacherByIdQuery { ssn = ssn });
+
+            return NewResult(result);
+
         }
 
         [HttpDelete("Delete/{id}")]
@@ -67,7 +71,7 @@ namespace SchoolManagement.API.Controllers
         {
             if (query == null) return BadRequest();
 
-            var result = await Mediator.Send(query);
+            var result = await _mediator.Send(query);
             return Ok(result);
 
         }

@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.Core.Bases;
 using System.Net;
 
@@ -8,8 +7,8 @@ namespace SchoolManagement.API.Base
     [ApiController]
     public class AppController : ControllerBase
     {
-        private IMediator _mediatorInstance;
-        protected IMediator Mediator => _mediatorInstance ??= HttpContext.RequestServices.GetService<IMediator>();
+        //private IMediator _mediatorInstance;
+        //protected IMediator Mediator => _mediatorInstance ??= HttpContext.RequestServices.GetService<IMediator>();
 
 
         #region Actions
@@ -31,6 +30,11 @@ namespace SchoolManagement.API.Base
                     return new AcceptedResult(string.Empty, response);
                 case HttpStatusCode.UnprocessableEntity:
                     return new UnprocessableEntityObjectResult(response);
+                case HttpStatusCode.NoContent:
+                    return new ObjectResult(null)
+                    {
+                        StatusCode = StatusCodes.Status204NoContent
+                    };
                 default:
                     return new BadRequestObjectResult(response);
             }

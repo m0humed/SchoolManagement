@@ -27,6 +27,8 @@ namespace SchoolManagement.Core
 
             services.AddValidatorsFromAssemblyContaining<AddTeacherValidator>();
             #endregion
+
+
             return services;
         }
 

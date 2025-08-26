@@ -1,16 +1,14 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Core.Features.Teachers.Queries
 {
     using Schoolmanagement.Domain.Entities;
     using SchoolManagement.Core.Bases;
+    using System.ComponentModel.DataAnnotations;
 
-    public record GetTeacherByIdQuery(string ssn):IRequest<Response<Teacher>>
+    public record GetTeacherByIdQuery : IRequest<Response<Teacher>>
     {
+        [Required]
+        public string ssn { get; set; } = null!;
     }
 }

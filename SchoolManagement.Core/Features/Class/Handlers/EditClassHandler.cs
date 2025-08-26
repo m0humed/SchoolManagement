@@ -6,19 +6,24 @@ using SchoolManagement.Service.IServices;
 
 namespace SchoolManagement.Core.Features.Class.Handlers
 {
+    using Microsoft.Extensions.Localization;
     using Schoolmanagement.Domain.Entities;
+    using SchoolManagement.Core.Resources;
+
     public class EditClassHandler : ResponseHandler, IRequestHandler<EditClassCommand, Response<bool>>
     {
         #region Fields
         private readonly IClassService _classService;
         private readonly IMapper _map;
+        private readonly IStringLocalizer<SharedResources> _localizer;
         #endregion
 
         #region Constructors
-        public EditClassHandler(IClassService classService, IMapper mapper)
+        public EditClassHandler(IClassService classService, IMapper mapper, IStringLocalizer<SharedResources> localizer) : base(localizer)
         {
             _classService = classService;
             _map = mapper;
+            _localizer = localizer;
         }
 
         #endregion
