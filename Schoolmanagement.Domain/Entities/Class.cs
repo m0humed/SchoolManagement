@@ -15,10 +15,15 @@ namespace Schoolmanagement.Domain.Entities
 
         [JsonIgnore]
         [InverseProperty(nameof(Student.Class))]
-        public virtual ICollection<Student> Students { get; set; } = new List<Student>();
-        //public Class()
-        //{
-        //    Id = Guid.NewGuid();
-        //}
+        public virtual ICollection<Student>? Students { get; set; }
+
+        [JsonIgnore]
+        [InverseProperty(nameof(ClassSchadual.Class))]
+        public virtual ICollection<ClassSchadual>? ClassSchaduals { get; set; }
+        public Class()
+        {
+            Students = new HashSet<Student>();
+            ClassSchaduals = new HashSet<ClassSchadual>();
+        }
     }
 }

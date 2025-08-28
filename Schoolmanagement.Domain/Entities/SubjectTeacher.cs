@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Schoolmanagement.Domain.Entities
 {
@@ -17,9 +12,11 @@ namespace Schoolmanagement.Domain.Entities
         public Guid SubjectId { get; set; }
 
         [ForeignKey(nameof(TeacherId))]
+        [InverseProperty(nameof(Teacher.SubjectTeachers))]
         public virtual Teacher Teacher { get; set; } = null!;
 
         [ForeignKey(nameof(SubjectId))]
+        [InverseProperty(nameof(Subject.SubjectTeachers))]
         public virtual Subject Subject { get; set; } = null!;
 
     }

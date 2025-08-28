@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Schoolmanagement.Domain.Entities
 {
@@ -25,12 +20,15 @@ namespace Schoolmanagement.Domain.Entities
 
 
         [ForeignKey(nameof(ClassId))]
+        [InverseProperty(nameof(Class.ClassSchaduals))]
         public virtual Class Class { get; set; } = null!;
 
         [ForeignKey(nameof(SubjectId))]
+        [InverseProperty(nameof(Subject.ClassSchaduals))]
         public virtual Subject Subject { get; set; } = null!;
 
         [ForeignKey(nameof(TeacherId))]
+        [InverseProperty(nameof(Teacher.ClassSchaduals))]
         public virtual Teacher Teacher { get; set; } = null!;
 
     }

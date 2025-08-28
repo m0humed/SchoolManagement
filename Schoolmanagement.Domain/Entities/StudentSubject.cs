@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Schoolmanagement.Domain.Entities
 {
@@ -12,21 +7,23 @@ namespace Schoolmanagement.Domain.Entities
     {
         [Required]
         public string StudentId { get; set; } = null!;
-        
+
         [Required]
         public Guid SubjectId { get; set; }
 
         [ForeignKey(nameof(StudentId))]
+        [InverseProperty(nameof(Student.StudentSubjects))]
         public virtual Student Student { get; set; } = null!;
 
         [ForeignKey(nameof(SubjectId))]
+        [InverseProperty(nameof(Subject.StudentSubjects))]
         public virtual Subject Subject { get; set; } = null!;
 
-        public short MidtermScore { get; set; }
+        public ushort? MidtermScore { get; set; }
 
-        public short FinalScore { get; set; }
+        public ushort? FinalScore { get; set; }
 
-        public short ProjectScore { get; set; }
+        public ushort? ProjectScore { get; set; }
 
     }
 }
