@@ -130,6 +130,9 @@
     <value>the server has problem</value>
     <comment>try again</comment>
   </data>
+  <data name="FIRSTNAMEAR" xml:space="preserve">
+    <value />
+  </data>
   <data name="NotFound" xml:space="preserve">
     <value>object Not Found</value>
   </data>
@@ -139,14 +142,32 @@
   <data name="NullValue" xml:space="preserve">
     <value>Object is Empty</value>
   </data>
+  <data name="Repeated Class Information" xml:space="preserve">
+    <value>there is a class with same Information</value>
+  </data>
   <data name="required" xml:space="preserve">
     <value>This Information is required</value>
+  </data>
+  <data name="RetriveStudentError" xml:space="preserve">
+    <value>Have a probelm in retrive Students Data</value>
+  </data>
+  <data name="SECONDNAMEAR" xml:space="preserve">
+    <value />
+  </data>
+  <data name="spacification of Language" xml:space="preserve">
+    <value>Must write with English letters</value>
   </data>
   <data name="SSN" xml:space="preserve">
     <value>SSN</value>
   </data>
+  <data name="StudentDataNotValid" xml:space="preserve">
+    <value>There is a problem in Send Data way</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success Process</value>
+  </data>
+  <data name="THIRDNAMEAR" xml:space="preserve">
+    <value />
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>UnAuthorized Conection</value>

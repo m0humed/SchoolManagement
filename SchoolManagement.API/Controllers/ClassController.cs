@@ -1,9 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Localization;
 using Schoolmanagement.Domain.Entities;
 using SchoolManagement.API.Base;
 using SchoolManagement.Core.Features.Class.Commands;
 using SchoolManagement.Core.Features.Class.Queries;
+using SchoolManagement.Core.Resources;
 
 namespace SchoolManagement.API.Controllers
 {
@@ -13,13 +15,15 @@ namespace SchoolManagement.API.Controllers
     {
         #region Fields
         private readonly IMediator _mediator;
+        private readonly IStringLocalizer<SharedResources> _localization;
 
         #endregion
 
         #region Constructors
-        public ClassController(IMediator mediator)
+        public ClassController(IMediator mediator, IStringLocalizer<SharedResources> localization)
         {
             this._mediator = mediator;
+            _localization = localization;
         }
 
         [HttpPost]
@@ -32,14 +36,19 @@ namespace SchoolManagement.API.Controllers
             }
             try
             {
-                await _mediator.Send(new AddClassCommand(command));
+                var result = await _mediator.Send(new AddClassCommand(command));
+                return NewResult(result);
             }
-            catch (Exception ex)
+            catch
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, $"Internal server error: {ex.Message}");
+                return NewResult(new Core.Bases.Response<bool>
+                {
+                    Data = false,
+                    StatusCode = System.Net.HttpStatusCode.BadRequest,
+                    Message = _localization[SharedResourcesKeys.repetedClassNumber],
+                    Succeeded = false
+                });
             }
-
-            return Ok("Class added success");
         }
 
         [HttpGet]
@@ -65,6 +74,13 @@ namespace SchoolManagement.API.Controllers
             return NewResult(result);
         }
 
+        [HttpDelete("Delete/{Id}")]
+        public async Task<IActionResult> DeleteClass([FromRoute] string Id)
+        {
+            var result = await _mediator.Send(new DeleteClassCommand { Id = Guid.Parse(Id) });
+
+            return NewResult(result);
+        }
         #endregion
 
     }

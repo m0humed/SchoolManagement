@@ -13,8 +13,11 @@
         public const string Success = "Success";
         public const string UnAuthorized = "UnAuthorized";
         public const string Created = "Created";
+        public const string repetedClassNumber = "Repeated Class Information";
 
+        public const string SpacificeLanguage = "spacification of Language";
 
-
+        public const string StudentDataNotValid = "StudentDataNotValid";
+        public const string RetriveStudentError = "RetriveStudentError";
     }
 }

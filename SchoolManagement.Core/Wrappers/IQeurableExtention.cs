@@ -1,4 +1,6 @@
-﻿namespace SchoolManagement.Core.Wrappers
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace SchoolManagement.Core.Wrappers
 {
     public static class IQeurableExtention
     {
@@ -17,7 +19,7 @@
             {
                 return PaginationResult<T>.Success(new List<T>(), pageSize, pageNumber, count);
             }
-            var items = source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            var items = await source.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
             return PaginationResult<T>.Success(items, pageSize, pageNumber, count);
         }
     }

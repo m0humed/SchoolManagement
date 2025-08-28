@@ -1,20 +1,24 @@
 ﻿using FluentValidation;
+using Microsoft.Extensions.Localization;
 using SchoolManagement.Core.Features.Class.Commands;
+using SchoolManagement.Core.Resources;
 using SchoolManagement.Service.IServices;
 
 namespace SchoolManagement.Core.Features.Class.Validation
 {
-    public class EditClassValidation : AbstractValidator<EditClassCommand>
+    public class AddClassValidation : AbstractValidator<AddClassCommand>
     {
 
         #region Fields
         private readonly IClassService _service;
+        private readonly IStringLocalizer<SharedResources> _localizer;
         #endregion
 
         #region CTOR
-        public EditClassValidation(IClassService service)
+        public AddClassValidation(IClassService service, IStringLocalizer<SharedResources> localizer)
         {
             _service = service;
+            _localizer = localizer;
             ApplyValidationRule();
 
         }
@@ -24,10 +28,10 @@ namespace SchoolManagement.Core.Features.Class.Validation
 
         public void ApplyValidationRule()
         {
-            RuleFor(x => new { x.Stage, x.ClassNumber, x.Id })
+            RuleFor(x => new { x.c.Id, x.c.ClassNumber, x.c.Stage })
                 .MustAsync(async (value, cancellation) =>
                     !await _service.ExistsByStageAndClassNumberAsync(value.Stage, value.ClassNumber, value.Id))
-                .WithMessage("A class with the same stage and class number already exists.");
+                .WithMessage(_localizer[SharedResourcesKeys.repetedClassNumber]);
 
 
         }

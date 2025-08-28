@@ -1,11 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SchoolManagement.Infrastructure.IRepositories;
 using SchoolManagement.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SchoolManagement.Infrastructure
 {
@@ -17,7 +12,7 @@ namespace SchoolManagement.Infrastructure
             services.AddScoped<IClassRepositoy, ClassRepositoy>();
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
-            // services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IStudentRepository, StudentRepository>();
             // services.AddScoped<IUnitOfWork, UnitOfWork>();
             // services.AddDbContext<SchoolManagementDbContext>(options => 
             //     options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

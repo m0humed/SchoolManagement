@@ -45,7 +45,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 throw new KeyNotFoundException($"Class with ID {id} not found.");
             }
-            await Task.Run(() => DbContext.Classes.Remove(entity));
+            DbContext.Classes.Remove(entity);
             await DbContext.SaveChangesAsync();
 
         }
