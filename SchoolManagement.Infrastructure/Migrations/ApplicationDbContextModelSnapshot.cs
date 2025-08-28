@@ -42,7 +42,7 @@ namespace SchoolManagement.Infrastructure.Migrations
                     b.HasIndex("Stage", "ClassNumber")
                         .IsUnique();
 
-                    b.ToTable("Classes");
+                    b.ToTable("Classes", (string)null);
                 });
 
             modelBuilder.Entity("Schoolmanagement.Domain.Entities.ClassSchadual", b =>
@@ -68,7 +68,7 @@ namespace SchoolManagement.Infrastructure.Migrations
 
                     b.HasIndex("TeacherId");
 
-                    b.ToTable("classSchaduals");
+                    b.ToTable("classSchaduals", (string)null);
                 });
 
             modelBuilder.Entity("Schoolmanagement.Domain.Entities.Student", b =>
@@ -132,7 +132,7 @@ namespace SchoolManagement.Infrastructure.Migrations
 
                     b.HasIndex("ClassId");
 
-                    b.ToTable("Students");
+                    b.ToTable("Students", (string)null);
                 });
 
             modelBuilder.Entity("Schoolmanagement.Domain.Entities.StudentSubject", b =>
@@ -156,7 +156,7 @@ namespace SchoolManagement.Infrastructure.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("StudentSubjects");
+                    b.ToTable("StudentSubjects", (string)null);
                 });
 
             modelBuilder.Entity("Schoolmanagement.Domain.Entities.Subject", b =>
@@ -180,7 +180,7 @@ namespace SchoolManagement.Infrastructure.Migrations
                     b.HasIndex("Titel")
                         .IsUnique();
 
-                    b.ToTable("Subjects");
+                    b.ToTable("Subjects", (string)null);
                 });
 
             modelBuilder.Entity("Schoolmanagement.Domain.Entities.SubjectAttachment", b =>
@@ -208,7 +208,7 @@ namespace SchoolManagement.Infrastructure.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("SubjectAttachment");
+                    b.ToTable("SubjectAttachment", (string)null);
                 });
 
             modelBuilder.Entity("Schoolmanagement.Domain.Entities.SubjectTeacher", b =>
@@ -223,7 +223,7 @@ namespace SchoolManagement.Infrastructure.Migrations
 
                     b.HasIndex("SubjectId");
 
-                    b.ToTable("SubjectTeachers");
+                    b.ToTable("SubjectTeachers", (string)null);
                 });
 
             modelBuilder.Entity("Schoolmanagement.Domain.Entities.Teacher", b =>
@@ -262,7 +262,7 @@ namespace SchoolManagement.Infrastructure.Migrations
 
                     b.HasIndex("SuppervisorSSN");
 
-                    b.ToTable("Teachers");
+                    b.ToTable("Teachers", (string)null);
                 });
 
             modelBuilder.Entity("Schoolmanagement.Domain.Entities.ClassSchadual", b =>

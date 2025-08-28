@@ -39,7 +39,7 @@ namespace SchoolManagement.Service.Services
         {
             var items = GetAllQuerable();
             var result = items.Where(x => x.ssn.Contains(search) || x.FirstName.Contains(search)
-                           || x.PhoneNumber.Contains(search) || x.Email.Contains(search));
+                           || x.PhoneNumber!.Contains(search) || x.Email!.Contains(search));
             return result;
         }
 
