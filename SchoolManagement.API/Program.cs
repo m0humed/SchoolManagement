@@ -15,6 +15,23 @@ namespace SchoolManagement.API
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            #region Use CORS
+            var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
+            builder.Services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  policy =>
+                                  {
+                                      policy.AllowAnyOrigin()
+                                            .AllowAnyHeader()
+                                            .AllowAnyMethod()
+                                            //.AllowCredentials()  // this line is not valid with AllowAnyOrigin
+                                            ;
+                                  });
+            });
+            #endregion
+
             //builder.WebHost.ConfigureKestrel(options =>
             //{
             //    options.ListenLocalhost(7298, listenOptions =>
@@ -94,6 +111,8 @@ namespace SchoolManagement.API
 
 
             app.UseHttpsRedirection();
+            // Enable CORS
+            app.UseCors(MyAllowSpecificOrigins);
 
             app.UseAuthorization();
 
