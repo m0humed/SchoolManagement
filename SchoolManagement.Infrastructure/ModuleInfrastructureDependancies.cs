@@ -13,10 +13,8 @@ namespace SchoolManagement.Infrastructure
             services.AddScoped<ISubjectRepository, SubjectRepository>();
             services.AddScoped<ITeacherRepository, TeacherRepository>();
             services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<IStudentRepository, StudentRepository>();
-            services.AddScoped<IStudentRepository, StudentRepository>();
+            services.AddScoped<IClassSchadual, ClassSchadualRepository>();
+            
 
             // services.AddScoped<IUnitOfWork, UnitOfWork>();
             // services.AddDbContext<SchoolManagementDbContext>(options => 
