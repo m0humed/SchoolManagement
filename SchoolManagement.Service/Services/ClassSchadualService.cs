@@ -8,34 +8,34 @@ namespace SchoolManagement.Service.Services
     public class ClassSchadualService : IClassSchadualService
     {
         #region Field
-        private IClassSchadualRepository _classSchadualService;
+        private IClassSchadualRepository _classSchadualReository;
         #endregion
 
         #region Constructors
         public ClassSchadualService(IClassSchadualRepository classSchadualRepository)
         {
-            _classSchadualService = classSchadualRepository;
+            _classSchadualReository = classSchadualRepository;
         }
         #endregion
 
         public async Task AddAsync(ClassSchadual entity)
         {
-           await _classSchadualService.AddAsync(entity);
+            await _classSchadualReository.AddAsync(entity);
         }
 
         public async Task DeleteAsync(Guid id)
         {
-            await _classSchadualService.DeleteAsync(id);
+            await _classSchadualReository.DeleteAsync(id);
         }
 
         public async Task<bool> ExistsAsync(Guid id)
         {
-            return await _classSchadualService.ExistsAsync(id);
+            return await _classSchadualReository.ExistsAsync(id);
         }
 
         public async Task<IEnumerable<ClassSchadual>> GetAllAsync()
         {
-             return await _classSchadualService.GetAllAsync();
+            return await _classSchadualReository.GetAllAsync();
         }
 
         public Task<ClassSchadual> GetByIdAsync(Guid id)
@@ -45,17 +45,17 @@ namespace SchoolManagement.Service.Services
 
         public async Task<IEnumerable<ClassSchadual>> GetSchadualByClassIdAsync(Guid classId)
         {
-            return await _classSchadualService.GetSchadualByClassIdAsync(classId);
+            return await _classSchadualReository.GetSchadualByClassIdAsync(classId);
         }
 
         public async Task<IEnumerable<ClassSchadual>> GetSchadualByTeacherIdAsync(string teacherId)
         {
-            return await _classSchadualService.GetSchadualByTeacherIdAsync(teacherId);
+            return await _classSchadualReository.GetSchadualByTeacherIdAsync(teacherId);
         }
 
         public async Task UpdateAsync(ClassSchadual entity)
         {
-             await _classSchadualService.UpdateAsync(entity);
+            await _classSchadualReository.UpdateAsync(entity);
         }
     }
 }

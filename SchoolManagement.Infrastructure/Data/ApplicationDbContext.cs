@@ -15,6 +15,8 @@ namespace SchoolManagement.Infrastructure.Data
         {
         }
 
+
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
 
