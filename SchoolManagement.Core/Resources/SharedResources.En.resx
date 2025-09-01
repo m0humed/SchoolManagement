@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CanNotSave" xml:space="preserve">
+    <value>Can't save this informations</value>
+  </data>
+  <data name="ClassId" xml:space="preserve">
+    <value>Class ID</value>
+  </data>
   <data name="Created" xml:space="preserve">
     <value>Created Successfully</value>
   </data>
@@ -130,11 +136,17 @@
     <value>the server has problem</value>
     <comment>try again</comment>
   </data>
+  <data name="falseTimeFormat" xml:space="preserve">
+    <value>time format not true</value>
+  </data>
   <data name="FIRSTNAMEAR" xml:space="preserve">
-    <value />
+    <value>First name</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>object Not Found</value>
+  </data>
+  <data name="NotValidRequest" xml:space="preserve">
+    <value>We have a problem in request</value>
   </data>
   <data name="NotValidSSN" xml:space="preserve">
     <value>Invalid SSN Format</value>
@@ -152,7 +164,7 @@
     <value>Have a probelm in retrive Students Data</value>
   </data>
   <data name="SECONDNAMEAR" xml:space="preserve">
-    <value />
+    <value>Middle name</value>
   </data>
   <data name="spacification of Language" xml:space="preserve">
     <value>Must write with English letters</value>
@@ -163,11 +175,17 @@
   <data name="StudentDataNotValid" xml:space="preserve">
     <value>There is a problem in Send Data way</value>
   </data>
+  <data name="SubjectId" xml:space="preserve">
+    <value>Subject ID</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>Success Process</value>
   </data>
+  <data name="TeacherId" xml:space="preserve">
+    <value>SSN</value>
+  </data>
   <data name="THIRDNAMEAR" xml:space="preserve">
-    <value />
+    <value>Last name</value>
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>UnAuthorized Conection</value>

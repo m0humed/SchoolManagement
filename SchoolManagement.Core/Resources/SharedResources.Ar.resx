@@ -117,6 +117,12 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="CanNotSave" xml:space="preserve">
+    <value>لا يمكن حفظ هذه البيانات</value>
+  </data>
+  <data name="ClassId" xml:space="preserve">
+    <value>كود الفصل</value>
+  </data>
   <data name="Created" xml:space="preserve">
     <value>تم انشاء العنصر بنجاح</value>
   </data>
@@ -130,11 +136,17 @@
     <value>توجد مشكله في السيرفر</value>
     <comment>حاول مره اخره</comment>
   </data>
+  <data name="falseTimeFormat" xml:space="preserve">
+    <value>تنظيم الوقت غير صحيح</value>
+  </data>
   <data name="FIRSTNAMEAR" xml:space="preserve">
     <value>الاسم الأول</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>العنصر غير موجود</value>
+  </data>
+  <data name="NotValidRequest" xml:space="preserve">
+    <value>يوجد مشكله في الطلب</value>
   </data>
   <data name="NotValidSSN" xml:space="preserve">
     <value>تنسيق الرقم القومي غير صحيح</value>
@@ -163,8 +175,14 @@
   <data name="StudentDataNotValid" xml:space="preserve">
     <value>توجد مشكله في طريقة ارسال البيانات</value>
   </data>
+  <data name="SubjectId" xml:space="preserve">
+    <value>كود الماده</value>
+  </data>
   <data name="Success" xml:space="preserve">
     <value>تمت العمليه بنجاح</value>
+  </data>
+  <data name="TeacherId" xml:space="preserve">
+    <value>الرقم القومي </value>
   </data>
   <data name="THIRDNAMEAR" xml:space="preserve">
     <value>الاسم الثالث</value>

@@ -13,6 +13,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\ClassSchadual\Results\" />
+    <Folder Include="Features\ClassSchadual\queries\" />
     <Folder Include="Mapping\Subject\CommandMapping\" />
   </ItemGroup>
 

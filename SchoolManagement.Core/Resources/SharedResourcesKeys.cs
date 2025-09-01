@@ -19,5 +19,12 @@
 
         public const string StudentDataNotValid = "StudentDataNotValid";
         public const string RetriveStudentError = "RetriveStudentError";
+
+        public const string TeacherId = "TeacherId";
+        public const string SubjectId = "SubjectId";
+        public const string ClassId = "ClassId";
+        public const string CanNotSave = "CanNotSave";
+        public const string NotValidRequest = "NotValidRequest";
+        public const string falseTimeFormat = "falseTimeFormat";
     }
 }
