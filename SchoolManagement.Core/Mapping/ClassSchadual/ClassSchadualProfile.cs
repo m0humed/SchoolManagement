@@ -7,6 +7,8 @@ namespace SchoolManagement.Core.Mapping.ClassSchadual
         public ClassSchadualProfile()
         {
             AddClassSchadual();
+            ClassSchadualResult();
         }
+
     }
 }
