@@ -24,5 +24,7 @@
         public const string SubjectId = "SubjectId";
         public const string ClassId = "ClassId";
         public const string CanNotSave = "CanNotSave";
+        public const string NotValidRequest = "NotValidRequest";
+        public const string falseTimeFormat = "falseTimeFormat";
     }
 }

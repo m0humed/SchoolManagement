@@ -136,11 +136,17 @@
     <value>the server has problem</value>
     <comment>try again</comment>
   </data>
+  <data name="falseTimeFormat" xml:space="preserve">
+    <value>time format not true</value>
+  </data>
   <data name="FIRSTNAMEAR" xml:space="preserve">
     <value>First name</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>object Not Found</value>
+  </data>
+  <data name="NotValidRequest" xml:space="preserve">
+    <value>We have a problem in request</value>
   </data>
   <data name="NotValidSSN" xml:space="preserve">
     <value>Invalid SSN Format</value>

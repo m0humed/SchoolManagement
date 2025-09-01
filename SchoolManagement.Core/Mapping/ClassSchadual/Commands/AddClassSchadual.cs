@@ -8,7 +8,8 @@ namespace SchoolManagement.Core.Mapping.ClassSchadual
 
         void AddClassSchadual()
         {
-            CreateMap<AddClassSchadualCommand, ClassSchadual>();
+            CreateMap<AddClassSchadualCommand, ClassSchadual>()
+                .ForMember(dest => dest.StartTime, conf => conf.MapFrom(x => TimeOnly.Parse(x.StartTime)));
 
         }
 

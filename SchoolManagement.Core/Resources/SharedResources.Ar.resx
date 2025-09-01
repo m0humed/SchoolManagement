@@ -136,11 +136,17 @@
     <value>توجد مشكله في السيرفر</value>
     <comment>حاول مره اخره</comment>
   </data>
+  <data name="falseTimeFormat" xml:space="preserve">
+    <value>تنظيم الوقت غير صحيح</value>
+  </data>
   <data name="FIRSTNAMEAR" xml:space="preserve">
     <value>الاسم الأول</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>العنصر غير موجود</value>
+  </data>
+  <data name="NotValidRequest" xml:space="preserve">
+    <value>يوجد مشكله في الطلب</value>
   </data>
   <data name="NotValidSSN" xml:space="preserve">
     <value>تنسيق الرقم القومي غير صحيح</value>
