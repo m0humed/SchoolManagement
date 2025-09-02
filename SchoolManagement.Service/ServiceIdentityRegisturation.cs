@@ -7,7 +7,7 @@ namespace SchoolManagement.Service
 {
     public static class ServiceIdentityRegisturation
     {
-        public static IServiceCollection AddServiceDependancies(this IServiceCollection Services)
+        public static IServiceCollection SrviceIdentityRegisturation(this IServiceCollection Services)
         {
             Services.AddIdentity<User, IdentityRole>(
                 options =>
