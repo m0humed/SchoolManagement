@@ -59,7 +59,7 @@ namespace SchoolManagement.API.Controllers
         [HttpGet("GetClassSchadual")]
         public async Task<IActionResult> GetSchadual([FromQuery] Guid ClassId)
         {
-            if (!ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var result = await _mediator.Send(new GetSchadualOfClassQuery { ClassId = ClassId });
                 return NewResult(result);
