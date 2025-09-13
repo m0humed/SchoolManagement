@@ -55,9 +55,15 @@ namespace SchoolManagement.API
             #region Depandancies injections
             // Add infrastructure dependencies
             builder.Services.AddInfrastructureDependancies();
+            // Add Service Dependancies
             builder.Services.AddServiceDependancies();
+            builder.Services.SrviceIdentityRegisturation();
+            // Add Core Dependancies
             builder.Services.AddCoreDependancies();
+
             #endregion
+
+
 
             // Add Swagger UI for browser-based API testing
             builder.Services.AddEndpointsApiExplorer();

@@ -17,7 +17,7 @@ namespace SchoolManagement.Infrastructure.Repositories
 
         public async Task<IEnumerable<ClassSchadual>> GetSchadualByClassIdAsync(Guid classId)
         {
-            var schaduals = _context.classSchaduals.Where(cs => cs.ClassId == classId);
+            var schaduals = _context.classSchaduals.Include(c => c.Class).Include(s => s.Teacher).Where(cs => cs.ClassId == classId);
             var orderSchadual = await schaduals.OrderBy(x => x.DayOfWeek).ThenBy(x => x.StartTime).ToListAsync();
             return orderSchadual;
         }

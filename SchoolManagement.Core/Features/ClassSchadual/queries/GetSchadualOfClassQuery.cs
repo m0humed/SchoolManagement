@@ -1,15 +1,12 @@
-﻿using Azure;
+﻿
 using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using SchoolManagement.Core.Bases;
+using SchoolManagement.Core.Features.ClassSchadual.Results;
 
 namespace SchoolManagement.Core.Features.ClassSchadual.queries
 {
-    public record GetSchadualOfClassQuery:IRequest<Response<>>
+    public record GetSchadualOfClassQuery : IRequest<Response<IEnumerable<GetClassSchadualResult>>>
     {
-
+        public Guid ClassId { get; set; }
     }
 }

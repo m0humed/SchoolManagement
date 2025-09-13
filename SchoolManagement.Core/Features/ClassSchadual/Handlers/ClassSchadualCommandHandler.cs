@@ -36,7 +36,7 @@ namespace SchoolManagement.Core.Features.ClassSchadual.Handlers
                 await _classSchadualService.AddAsync(schadual);
                 return Created<bool>(true);
             }
-            catch (Exception ex)
+            catch
             {
                 return ServerError<bool>(_localizer[SharedResourcesKeys.CanNotSave]);
             }

@@ -5,6 +5,8 @@ using Microsoft.Extensions.Localization;
 using SchoolManagement.API.Base;
 using SchoolManagement.Core.Bases;
 using SchoolManagement.Core.Features.ClassSchadual.Commands;
+using SchoolManagement.Core.Features.ClassSchadual.queries;
+using SchoolManagement.Core.Features.ClassSchadual.Results;
 using SchoolManagement.Core.Resources;
 
 namespace SchoolManagement.API.Controllers
@@ -52,6 +54,30 @@ namespace SchoolManagement.API.Controllers
                     );
             }
 
+        }
+
+        [HttpGet("GetClassSchadual")]
+        public async Task<IActionResult> GetSchadual([FromQuery] Guid ClassId)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _mediator.Send(new GetSchadualOfClassQuery { ClassId = ClassId });
+                return NewResult(result);
+            }
+            else
+            {
+                return NewResult
+                  (
+                      new Response<IEnumerable<GetClassSchadualResult>>
+                      {
+                          Data = new List<GetClassSchadualResult>(),
+                          StatusCode = System.Net.HttpStatusCode.BadRequest,
+                          Message = _localizer[SharedResourcesKeys.NotValidRequest],
+                          Succeeded = false
+                      }
+
+                  );
+            }
         }
 
     }

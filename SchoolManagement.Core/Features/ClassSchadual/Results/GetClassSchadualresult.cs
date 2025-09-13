@@ -1,6 +1,6 @@
 ﻿namespace SchoolManagement.Core.Features.ClassSchadual.Results
 {
-    public class GetClassSchadualresult
+    public class GetClassSchadualResult
     {
         public string TeacherName { get; set; } = null!;
 
