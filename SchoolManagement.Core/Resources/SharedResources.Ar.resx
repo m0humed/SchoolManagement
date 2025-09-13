@@ -129,8 +129,14 @@
   <data name="Delete" xml:space="preserve">
     <value>تم حذف العنصر بنجاح</value>
   </data>
+  <data name="EmailAlreadyExist" xml:space="preserve">
+    <value>الحساب موجود بالفعل</value>
+  </data>
   <data name="EmptySSN" xml:space="preserve">
     <value>الرقم القومي غير موجود</value>
+  </data>
+  <data name="emptyValue" xml:space="preserve">
+    <value>العنصر فارغ</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>توجد مشكله في السيرفر</value>
@@ -141,6 +147,9 @@
   </data>
   <data name="FIRSTNAMEAR" xml:space="preserve">
     <value>الاسم الأول</value>
+  </data>
+  <data name="Name3" xml:space="preserve">
+    <value>يجب ان يكون الاسم مكون من ثلاث اسماء</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>العنصر غير موجود</value>
@@ -153,6 +162,9 @@
   </data>
   <data name="NullValue" xml:space="preserve">
     <value>العنصر لا يحتوي علي قيمه</value>
+  </data>
+  <data name="PassNotEqual" xml:space="preserve">
+    <value>كلمات السر غير متشايها</value>
   </data>
   <data name="Repeated Class Information" xml:space="preserve">
     <value>يوجد فصل لديه نفس البيانات</value>
@@ -189,5 +201,11 @@
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>غير مصرح بالوصول</value>
+  </data>
+  <data name="UnValidCast" xml:space="preserve">
+    <value>التحويل غير ممكن</value>
+  </data>
+  <data name="UserNameAlreadyExist" xml:space="preserve">
+    <value>اليوزر موجود بالفعل</value>
   </data>
 </root>

@@ -26,5 +26,13 @@
         public const string CanNotSave = "CanNotSave";
         public const string NotValidRequest = "NotValidRequest";
         public const string falseTimeFormat = "falseTimeFormat";
+        public const string emptyValue = "emptyValue";
+        public const string Name3 = "Name 3";
+        public const string PassNotEqual = "PassNotEqual";
+        public const string EmailAlreadyExist = "EmailAlreadyExist";
+        public const string UserNameAlreadyExist = "UserNameAlreadyExist";
+        public const string UnValidCast = "UnValidCast";
+
+
     }
 }

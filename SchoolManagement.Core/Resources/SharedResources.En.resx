@@ -129,8 +129,14 @@
   <data name="Delete" xml:space="preserve">
     <value>Deleted Successfully</value>
   </data>
+  <data name="EmailAlreadyExist" xml:space="preserve">
+    <value>Email Already Exist</value>
+  </data>
   <data name="EmptySSN" xml:space="preserve">
     <value>SSN can't be Empty</value>
+  </data>
+  <data name="emptyValue" xml:space="preserve">
+    <value>the value Is empty</value>
   </data>
   <data name="error" xml:space="preserve">
     <value>the server has problem</value>
@@ -141,6 +147,9 @@
   </data>
   <data name="FIRSTNAMEAR" xml:space="preserve">
     <value>First name</value>
+  </data>
+  <data name="Name3" xml:space="preserve">
+    <value>the name must contain 3 names</value>
   </data>
   <data name="NotFound" xml:space="preserve">
     <value>object Not Found</value>
@@ -153,6 +162,9 @@
   </data>
   <data name="NullValue" xml:space="preserve">
     <value>Object is Empty</value>
+  </data>
+  <data name="PassNotEqual" xml:space="preserve">
+    <value>password not equal ConfirmPassword</value>
   </data>
   <data name="Repeated Class Information" xml:space="preserve">
     <value>there is a class with same Information</value>
@@ -189,5 +201,11 @@
   </data>
   <data name="UnAuthorized" xml:space="preserve">
     <value>UnAuthorized Conection</value>
+  </data>
+  <data name="UnValidCast" xml:space="preserve">
+    <value>not valid Cast</value>
+  </data>
+  <data name="UserNameAlreadyExist" xml:space="preserve">
+    <value>Username Already Exist</value>
   </data>
 </root>
