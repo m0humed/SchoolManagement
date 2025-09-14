@@ -166,8 +166,17 @@
   <data name="PassNotEqual" xml:space="preserve">
     <value>password not equal ConfirmPassword</value>
   </data>
+  <data name="PhoneNumberLength" xml:space="preserve">
+    <value>must contain 11-number</value>
+  </data>
   <data name="Repeated Class Information" xml:space="preserve">
     <value>there is a class with same Information</value>
+  </data>
+  <data name="repeatedPhone" xml:space="preserve">
+    <value>Phone number already exist</value>
+  </data>
+  <data name="repeatedSSN" xml:space="preserve">
+    <value>SSN Is already Exist</value>
   </data>
   <data name="required" xml:space="preserve">
     <value>This Information is required</value>
@@ -183,6 +192,9 @@
   </data>
   <data name="SSN" xml:space="preserve">
     <value>SSN</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>Data Updated successfully</value>
   </data>
   <data name="StudentDataNotValid" xml:space="preserve">
     <value>There is a problem in Send Data way</value>
@@ -207,5 +219,11 @@
   </data>
   <data name="UserNameAlreadyExist" xml:space="preserve">
     <value>Username Already Exist</value>
+  </data>
+  <data name="DeleteField" xml:space="preserve">
+    <value>We  had a problem during deleting</value>
+  </data>
+  <data name="FalseOldPassword" xml:space="preserve">
+    <value />
   </data>
 </root>

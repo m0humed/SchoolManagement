@@ -50,6 +50,50 @@ namespace SchoolManagement.API.Controllers
             return NewResult(result);
         }
 
+        [HttpPut("UpdateUser")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateUserCommand command)
+        {
+            try
+            {
+                var result = await _mediator.Send(command);
+
+                return NewResult(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPost("DeleteUser/{id}")]
+        public async Task<IActionResult> UpdateUser(string id)
+        {
+            try
+            {
+                var result = await _mediator.Send(new DeleteUserCommand { id = id });
+
+                return NewResult(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
+
+        [HttpPut("UpdatePassword")]
+        public async Task<IActionResult> UpdatePassword([FromBody] ChangePasswordCommand command)
+        {
+            try
+            {
+                var result = await _mediator.Send(command);
+
+                return NewResult(result);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(ex.Message);
+            }
+        }
 
     }
 }

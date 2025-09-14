@@ -27,6 +27,17 @@ namespace SchoolManagement.Core.Bases
                 Message = _localizer[SharedResourcesKeys.Delete]
             };
         }
+        public Response<T> Updated<T>()
+        {
+            return new Response<T>()
+            {
+                StatusCode = System.Net.HttpStatusCode.OK,
+                Succeeded = true,
+                Message = _localizer[SharedResourcesKeys.Updated]
+            };
+        }
+
+
         public Response<T> Success<T>(T entity, object? Meta = null)
         {
             return new Response<T>()

@@ -57,7 +57,7 @@ namespace SchoolManagement.Service.Services
             var user = await _userRepository.GetUserByPhoneNumber(Phonenumber);
             if (user == null)
                 return false;
-            if (user.PhoneNumber == null || user.Id.Equals(id)) return false;
+            if (user.PhoneNumber == null || user.Id.Equals(id.ToString())) return false;
             return true;
         }
 
@@ -66,7 +66,7 @@ namespace SchoolManagement.Service.Services
             var user = await _userRepository.GetUserBySSNAsync(ssn);
             if (user == null)
                 return false;
-            if (user.ssn == null || user.Id.Equals(id)) return false;
+            if (user.ssn == null || user.Id.Equals(id.ToString())) return false;
             return true;
         }
 

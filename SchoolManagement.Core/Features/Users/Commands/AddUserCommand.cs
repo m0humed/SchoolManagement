@@ -10,6 +10,7 @@ namespace SchoolManagement.Core.Features.Users.Commands
     {
         [Required]
         public string SSN { get; set; } = null!;
+        public Guid Id { get; set; }
         public string UserName { get; set; } = null!;
         public string Fullname { get; set; } = null!;
         public Gender Gender { get; set; }

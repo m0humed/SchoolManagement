@@ -166,8 +166,17 @@
   <data name="PassNotEqual" xml:space="preserve">
     <value>كلمات السر غير متشايها</value>
   </data>
+  <data name="PhoneNumberLength" xml:space="preserve">
+    <value>يجب ان يتكون من 11 رقم</value>
+  </data>
   <data name="Repeated Class Information" xml:space="preserve">
     <value>يوجد فصل لديه نفس البيانات</value>
+  </data>
+  <data name="repeatedPhone" xml:space="preserve">
+    <value>رقم الهاتف موجود بالفعل</value>
+  </data>
+  <data name="repeatedSSN" xml:space="preserve">
+    <value>الرقم القومي موجود بالفعل</value>
   </data>
   <data name="required" xml:space="preserve">
     <value>هذه البيانات مطلوبه</value>
@@ -183,6 +192,9 @@
   </data>
   <data name="SSN" xml:space="preserve">
     <value>الرقم القومي</value>
+  </data>
+  <data name="Updated" xml:space="preserve">
+    <value>تم تحديث البيانات بنجاح</value>
   </data>
   <data name="StudentDataNotValid" xml:space="preserve">
     <value>توجد مشكله في طريقة ارسال البيانات</value>
@@ -207,5 +219,11 @@
   </data>
   <data name="UserNameAlreadyExist" xml:space="preserve">
     <value>اليوزر موجود بالفعل</value>
+  </data>
+  <data name="DeleteField" xml:space="preserve">
+    <value>حدثة مشكله اثناء عملية الحذف</value>
+  </data>
+  <data name="FalseOldPassword" xml:space="preserve">
+    <value>كلمة السر القديمه خاطئه</value>
   </data>
 </root>
