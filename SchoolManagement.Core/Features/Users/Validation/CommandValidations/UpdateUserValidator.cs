@@ -5,7 +5,7 @@ using SchoolManagement.Core.Resources;
 
 namespace SchoolManagement.Core.Features.Users.Validation.CommandValidations
 {
-    public class AddUserValidation : AbstractValidator<AddUserCommand>
+    public class UpdateUserValidator : AbstractValidator<UpdateUserCommand>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _localization;
@@ -13,11 +13,10 @@ namespace SchoolManagement.Core.Features.Users.Validation.CommandValidations
         #endregion
 
         #region Constructors
-        public AddUserValidation(IStringLocalizer<SharedResources> localizer)
+        public UpdateUserValidator(IStringLocalizer<SharedResources> localizer)
         {
             _localization = localizer;
             NameValidation();
-            PasswordValidion();
             SSNValidation();
 
         }
@@ -26,26 +25,20 @@ namespace SchoolManagement.Core.Features.Users.Validation.CommandValidations
         #region Validators
         private void SSNValidation()
         {
-            RuleFor(x => x.SSN)
+            RuleFor(x => x.ssn)
             .NotEmpty().WithMessage("SSN is required Falidation Rule.")
             .Matches(@"^(2|3)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{7}$")
             .WithMessage("Invalid Egyptian SSN format.");
         }
 
-        private void PasswordValidion()
-        {
-            RuleFor(x => x.Password)
-                .Equal(x => x.ConfirmedPassword)
-                .WithMessage(_localization[SharedResourcesKeys.PassNotEqual]);
-        }
 
         private void NameValidation()
         {
-            RuleFor(x => x.Fullname)
+            RuleFor(x => x.FullName)
                 .NotNull().WithMessage(_localization[SharedResourcesKeys.nullValue])
                 .NotEmpty().WithMessage(_localization[SharedResourcesKeys.emptyValue]);
 
-            RuleFor(x => x.Fullname)
+            RuleFor(x => x.FullName)
               .Must(fullName =>
               {
                   if (string.IsNullOrWhiteSpace(fullName)) return false;
