@@ -11,8 +11,8 @@ using SchoolManagement.Core.Wrappers;
 
 namespace SchoolManagement.Core.Features.Users.handlers
 {
-    public class QueriesHandlers : ResponseHandler, IRequestHandler<GetPaginatedUsersQuery,
-                                                       PaginationResult<GetPaginatedUsersResult>>
+    public class QueriesHandlers : ResponseHandler, IRequestHandler<GetPaginatedUsersQuery, PaginationResult<GetPaginatedUsersResult>>
+                                                  , IRequestHandler<GetUserByIdQuery, Response<GetUserByIdResult>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _localizer;
@@ -27,6 +27,7 @@ namespace SchoolManagement.Core.Features.Users.handlers
             _userManager = userManager;
         }
 
+        #region Handlers
         public async Task<PaginationResult<GetPaginatedUsersResult>> Handle(GetPaginatedUsersQuery request, CancellationToken cancellationToken)
         {
             var users = _userManager.Users.AsQueryable();
@@ -45,5 +46,22 @@ namespace SchoolManagement.Core.Features.Users.handlers
             );
 
         }
+
+        public async Task<Response<GetUserByIdResult>> Handle(GetUserByIdQuery request, CancellationToken cancellationToken)
+        {
+            if (request is null)
+                return BadRequest<GetUserByIdResult>(_localizer[SharedResourcesKeys.nullValue]);
+
+            var user = await _userManager.FindByIdAsync(request.UserId.ToString());
+
+            if (user == null)
+                return NotFound<GetUserByIdResult>(_localizer[SharedResourcesKeys.notFound]);
+
+            var mappedUser = _mapper.Map<GetUserByIdResult>(user);
+
+            return Success(mappedUser);
+        }
+
+        #endregion
     }
 }

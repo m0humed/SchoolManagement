@@ -8,7 +8,7 @@ namespace SchoolManagement.Core.Mapping.Users
         {
             AddUser();
             GetPaggenatedUsersmapping();
-
+            GetUserByIdMapping();
         }
 
 

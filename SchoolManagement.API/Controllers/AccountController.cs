@@ -43,5 +43,13 @@ namespace SchoolManagement.API.Controllers
             return Ok(result);
         }
 
+        [HttpGet("GetuserById")]
+        public async Task<IActionResult> GetUser([FromQuery] GetUserByIdQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return NewResult(result);
+        }
+
+
     }
 }
