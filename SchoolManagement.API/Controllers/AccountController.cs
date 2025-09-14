@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.API.Base;
 using SchoolManagement.Core.Features.Users.Commands;
+using SchoolManagement.Core.Features.Users.Queries;
 
 namespace SchoolManagement.API.Controllers
 {
@@ -29,11 +30,26 @@ namespace SchoolManagement.API.Controllers
 
                 return NewResult(result);
             }
-            catch
+            catch (Exception ex)
             {
-                return BadRequest();
+                return BadRequest(ex.Message);
             }
         }
+
+        [HttpGet("GetPageUser")]
+        public async Task<IActionResult> GetPageUser([FromQuery] GetPaginatedUsersQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return Ok(result);
+        }
+
+        [HttpGet("GetuserById")]
+        public async Task<IActionResult> GetUser([FromQuery] GetUserByIdQuery query)
+        {
+            var result = await _mediator.Send(query);
+            return NewResult(result);
+        }
+
 
     }
 }

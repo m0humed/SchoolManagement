@@ -17,12 +17,16 @@ namespace SchoolManagement.Core.Features.Users.handlers
         private readonly IMapper _mapper;
         #endregion
 
+        #region Constructors
         public CommandsHandlers(IStringLocalizer<SharedResources> localizer, UserManager<User> userManager, IMapper mapper) : base(localizer)
         {
             _localizer = localizer;
             _userManager = userManager;
             _mapper = mapper;
         }
+        #endregion
+
+        #region Handlers
 
         public async Task<Response<bool>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
@@ -49,6 +53,13 @@ namespace SchoolManagement.Core.Features.Users.handlers
                 return BadRequest<bool>(_localizer[SharedResourcesKeys.UserNameAlreadyExist]);
             }
 
+            // Should Check os SSN
+            //var SSN = await _userManager.FindByNameAsync(request.UserName);
+            //if (UUserName != null)
+            //{
+            //    return BadRequest<bool>(_localizer[SharedResourcesKeys.UserNameAlreadyExist]);
+            //}
+
             // Add User
 
             var mappedUser = _mapper.Map<User>(request);
@@ -62,5 +73,10 @@ namespace SchoolManagement.Core.Features.Users.handlers
             }
             return ServerError<bool>(_localizer[SharedResourcesKeys.UnValidCast]);
         }
+
+
+
+
+        #endregion
     }
 }
