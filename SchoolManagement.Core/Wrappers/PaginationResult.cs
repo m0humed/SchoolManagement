@@ -43,6 +43,7 @@
             messages = _messages;
             data = _data;
         }
+
         #endregion
 
         #region Methods

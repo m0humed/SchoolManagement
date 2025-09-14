@@ -17,12 +17,16 @@ namespace SchoolManagement.Core.Features.Users.handlers
         private readonly IMapper _mapper;
         #endregion
 
+        #region Constructors
         public CommandsHandlers(IStringLocalizer<SharedResources> localizer, UserManager<User> userManager, IMapper mapper) : base(localizer)
         {
             _localizer = localizer;
             _userManager = userManager;
             _mapper = mapper;
         }
+        #endregion
+
+        #region MyRegion
 
         public async Task<Response<bool>> Handle(AddUserCommand request, CancellationToken cancellationToken)
         {
@@ -62,5 +66,7 @@ namespace SchoolManagement.Core.Features.Users.handlers
             }
             return ServerError<bool>(_localizer[SharedResourcesKeys.UnValidCast]);
         }
+
+        #endregion
     }
 }
