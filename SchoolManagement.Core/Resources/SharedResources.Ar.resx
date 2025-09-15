@@ -226,4 +226,7 @@
   <data name="FalseOldPassword" xml:space="preserve">
     <value>كلمة السر القديمه خاطئه</value>
   </data>
+  <data name="FalsePassword" xml:space="preserve">
+    <value>كلمة السر  خاطئه</value>
+  </data>
 </root>

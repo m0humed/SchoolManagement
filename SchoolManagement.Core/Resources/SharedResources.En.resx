@@ -224,6 +224,9 @@
     <value>We  had a problem during deleting</value>
   </data>
   <data name="FalseOldPassword" xml:space="preserve">
-    <value />
+    <value>the old password is false</value>
+  </data>
+  <data name="FalsePassword" xml:space="preserve">
+    <value>the password is false</value>
   </data>
 </root>

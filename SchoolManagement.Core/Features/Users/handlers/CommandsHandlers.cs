@@ -156,7 +156,7 @@ namespace SchoolManagement.Core.Features.Users.handlers
             if (result.Succeeded)
                 return Success(true);
 
-            return BadRequest<bool>(_localizer[SharedResourcesKeys.error] + result.Errors.FirstOrDefault());
+            return BadRequest<bool>(_localizer[SharedResourcesKeys.FalseOldPassword]);
 
         }
 

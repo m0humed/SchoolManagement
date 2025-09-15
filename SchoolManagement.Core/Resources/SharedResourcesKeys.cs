@@ -38,6 +38,7 @@
         public const string Updated = "Updated";
         public const string DeleteField = "DeleteField";
         public const string FalseOldPassword = "FalseOldPassword";
+        public const string FalsePassword = "FalsePassword";
 
 
     }

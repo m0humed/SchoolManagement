@@ -57,7 +57,7 @@ namespace SchoolManagement.API
             builder.Services.AddInfrastructureDependancies();
             // Add Service Dependancies
             builder.Services.AddServiceDependancies();
-            builder.Services.SrviceIdentityRegisturation();
+            builder.Services.SrviceIdentityRegisturation(builder.Configuration);
             // Add Core Dependancies
             builder.Services.AddCoreDependancies();
 
@@ -120,6 +120,7 @@ namespace SchoolManagement.API
             // Enable CORS
             app.UseCors(MyAllowSpecificOrigins);
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
 

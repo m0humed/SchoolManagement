@@ -13,6 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="Features\Authentication\Validations\" />
+    <Folder Include="Features\Authentication\Results\" />
+    <Folder Include="Features\Authentication\Queries\" />
     <Folder Include="Features\ClassSchadual\queries\" />
     <Folder Include="Mapping\Subject\CommandMapping\" />
   </ItemGroup>
