@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Schoolmanagement.Domain.Entities.Identity;
+using Schoolmanagement.Domain.Results;
 using SchoolManagement.Core.Bases;
 using SchoolManagement.Core.Features.Authentication.Commands;
 using SchoolManagement.Core.Resources;
@@ -9,7 +10,7 @@ using SchoolManagement.Service.IServices;
 
 namespace SchoolManagement.Core.Features.Authentication.Handlers
 {
-    public class CommandsHandler : ResponseHandler, IRequestHandler<SignInCommand, Response<string>>
+    public class CommandsHandler : ResponseHandler, IRequestHandler<SignInCommand, Response<JwtAuthenticationResult>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _localizer;
@@ -27,20 +28,20 @@ namespace SchoolManagement.Core.Features.Authentication.Handlers
             _authenticationService = authenticationService;
         }
 
-        public async Task<Response<string>> Handle(SignInCommand request, CancellationToken cancellationToken)
+        public async Task<Response<JwtAuthenticationResult>> Handle(SignInCommand request, CancellationToken cancellationToken)
         {
             if (request == null)
-                return NullRequest<string>();
+                return NullRequest<JwtAuthenticationResult>();
             var user = await _userManager.FindByEmailAsync(request.UsernameOrEmail);
             if (user == null)
             {
                 user = await _userManager.FindByNameAsync(request.UsernameOrEmail);
                 if (user == null)
-                    return NotFound<string>(_localizer[SharedResourcesKeys.notFound]);
+                    return NotFound<JwtAuthenticationResult>(_localizer[SharedResourcesKeys.notFound]);
             }
             var SignCheck = await _signInManager.CheckPasswordSignInAsync(user, request.Password, false);
             if (!SignCheck.Succeeded)
-                return BadRequest<string>(_localizer[SharedResourcesKeys.FalsePassword]);
+                return BadRequest<JwtAuthenticationResult>(_localizer[SharedResourcesKeys.FalsePassword]);
 
             var token = await _authenticationService.CreateJWTToken(user);
 

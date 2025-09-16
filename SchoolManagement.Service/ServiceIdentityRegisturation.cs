@@ -4,8 +4,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using Schoolmanagement.Domain.Entities.Bind;
 using Schoolmanagement.Domain.Entities.Identity;
+using Schoolmanagement.Domain.Helper.Bind;
 using SchoolManagement.Infrastructure.Data;
 using System.Text;
 
