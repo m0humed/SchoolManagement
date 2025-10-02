@@ -7,7 +7,7 @@ namespace Schoolmanagement.Domain.Entities.Identity
     {
         [Key]
         public Guid Id { get; set; }
-        public string UserId { get; set; }
+        public string UserId { get; set; } = null!;
         public string? Token { get; set; }
         public string? RefreshToken { get; set; }
         public string? JwtId { get; set; }

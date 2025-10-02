@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.API.Base;
 using SchoolManagement.Core.Features.Authentication.Commands;
+using SchoolManagement.Core.Features.Authentication.Queries;
 
 namespace SchoolManagement.API.Controllers
 {
@@ -22,6 +23,20 @@ namespace SchoolManagement.API.Controllers
         #region Actions
         [HttpPost("SignIn")]
         public async Task<IActionResult> SignIn([FromForm] SignInCommand command)
+        {
+            var tokent = await _mediator.Send(command);
+
+            return NewResult(tokent);
+        }
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> RefreshToken([FromForm] RefreshTokenCommand command)
+        {
+            var response = await _mediator.Send(command);
+            return NewResult(response);
+        }
+
+        [HttpGet("Validate")]
+        public async Task<IActionResult> ValidateToken([FromQuery] ValidateTokenQuery command)
         {
             var tokent = await _mediator.Send(command);
 

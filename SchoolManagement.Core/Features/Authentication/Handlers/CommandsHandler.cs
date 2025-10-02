@@ -10,7 +10,8 @@ using SchoolManagement.Service.IServices;
 
 namespace SchoolManagement.Core.Features.Authentication.Handlers
 {
-    public class CommandsHandler : ResponseHandler, IRequestHandler<SignInCommand, Response<JwtAuthenticationResult>>
+    public class CommandsHandler : ResponseHandler, IRequestHandler<SignInCommand, Response<JwtAuthenticationResult>>,
+                                                   IRequestHandler<RefreshTokenCommand, Response<JwtAuthenticationResult>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _localizer;
@@ -46,6 +47,12 @@ namespace SchoolManagement.Core.Features.Authentication.Handlers
             var token = await _authenticationService.CreateJWTToken(user);
 
             return Success(token);
+        }
+
+        public async Task<Response<JwtAuthenticationResult>> Handle(RefreshTokenCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _authenticationService.GetRefreshToken(request.AccessToken, request.RefreshToken);
+            return Success(result);
         }
     }
 }
