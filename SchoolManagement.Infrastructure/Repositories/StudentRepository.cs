@@ -27,6 +27,7 @@ namespace SchoolManagement.Infrastructure.Repositories
             {
                 await _context.Students.AddAsync(entity);
                 await _context.SaveChangesAsync();
+
             }
             catch (Exception ex)
             {

@@ -6,7 +6,7 @@ using SchoolManagement.Service.IServices;
 
 namespace SchoolManagement.Core.Features.Users.Validation.CommandValidations
 {
-    public class AddUserValidation : AbstractValidator<AddUserCommand>
+    public class UpdateUserValidator : AbstractValidator<UpdateUserCommand>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _localization;
@@ -15,12 +15,11 @@ namespace SchoolManagement.Core.Features.Users.Validation.CommandValidations
         #endregion
 
         #region Constructors
-        public AddUserValidation(IStringLocalizer<SharedResources> localizer, IUserService userService)
+        public UpdateUserValidator(IStringLocalizer<SharedResources> localizer, IUserService userService)
         {
             _userService = userService;
             _localization = localizer;
             NameValidation();
-            PasswordValidion();
             SSNValidation();
             PhoneNumberValidation();
 
@@ -31,30 +30,24 @@ namespace SchoolManagement.Core.Features.Users.Validation.CommandValidations
         #region Methods
         private void SSNValidation()
         {
-            RuleFor(x => x.SSN)
+            RuleFor(x => x.ssn)
                 .NotEmpty().WithMessage("SSN is required Falidation Rule.")
                 .Matches(@"^(2|3)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])\d{7}$")
                 .WithMessage("Invalid Egyptian SSN format.");
 
             RuleFor(x => x)
-                .MustAsync(async (command, cancellation) => !await _userService.IsSSNExist(command.Id, command.SSN))
+                .MustAsync(async (command, cancellation) => !await _userService.IsSSNExist(command.Id, command.ssn))
                 .WithMessage(_localization[SharedResourcesKeys.repeatedSSN]);
         }
 
-        private void PasswordValidion()
-        {
-            RuleFor(x => x.Password)
-                .Equal(x => x.ConfirmedPassword)
-                .WithMessage(_localization[SharedResourcesKeys.PassNotEqual]);
-        }
 
         private void NameValidation()
         {
-            RuleFor(x => x.Fullname)
+            RuleFor(x => x.FullName)
                 .NotNull().WithMessage(_localization[SharedResourcesKeys.nullValue])
                 .NotEmpty().WithMessage(_localization[SharedResourcesKeys.emptyValue]);
 
-            RuleFor(x => x.Fullname)
+            RuleFor(x => x.FullName)
               .Must(fullName =>
               {
                   if (string.IsNullOrWhiteSpace(fullName)) return false;
@@ -84,5 +77,6 @@ namespace SchoolManagement.Core.Features.Users.Validation.CommandValidations
                 .WithMessage(_localization[SharedResourcesKeys.repeatedPhone]);
         }
         #endregion
+
     }
 }

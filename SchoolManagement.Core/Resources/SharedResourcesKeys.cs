@@ -32,6 +32,13 @@
         public const string EmailAlreadyExist = "EmailAlreadyExist";
         public const string UserNameAlreadyExist = "UserNameAlreadyExist";
         public const string UnValidCast = "UnValidCast";
+        public const string repeatedSSN = "repeatedSSN";
+        public const string PhoneNumberLength = "PhoneNumberLength";
+        public const string repeatedPhone = "repeatedPhone";
+        public const string Updated = "Updated";
+        public const string DeleteField = "DeleteField";
+        public const string FalseOldPassword = "FalseOldPassword";
+        public const string FalsePassword = "FalsePassword";
 
 
     }

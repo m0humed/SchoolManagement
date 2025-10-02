@@ -10,6 +10,10 @@ using SchoolManagement.Core.Resources;
 namespace SchoolManagement.Core.Features.Users.handlers
 {
     public class CommandsHandlers : ResponseHandler, IRequestHandler<AddUserCommand, Response<bool>>
+                                                   , IRequestHandler<UpdateUserCommand, Response<bool>>
+                                                   , IRequestHandler<DeleteUserCommand, Response<bool>>
+                                                   , IRequestHandler<ChangePasswordCommand, Response<bool>>
+
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _localizer;
@@ -65,6 +69,7 @@ namespace SchoolManagement.Core.Features.Users.handlers
             var mappedUser = _mapper.Map<User>(request);
             if (mappedUser != null)
             {
+                mappedUser.Id = Guid.NewGuid().ToString();
                 var AddResult = await _userManager.CreateAsync(mappedUser, request.Password);
                 if (AddResult.Succeeded)
                     return Created(true);
@@ -72,6 +77,87 @@ namespace SchoolManagement.Core.Features.Users.handlers
                     return ServerError<bool>(_localizer[SharedResourcesKeys.CanNotSave]);
             }
             return ServerError<bool>(_localizer[SharedResourcesKeys.UnValidCast]);
+        }
+
+        public async Task<Response<bool>> Handle(UpdateUserCommand request, CancellationToken cancellationToken)
+        {
+            if (request is null)
+                return BadRequest<bool>(_localizer[SharedResourcesKeys.nullValue]);
+
+            // Check Email
+            if (!string.IsNullOrWhiteSpace(request.Email))
+            {
+                var existingEmailUser = await _userManager.FindByEmailAsync(request.Email);
+                if (existingEmailUser != null && !request.Id.ToString().Equals(existingEmailUser.Id, StringComparison.OrdinalIgnoreCase))
+                {
+                    return BadRequest<bool>(_localizer[SharedResourcesKeys.EmailAlreadyExist]);
+                }
+            }
+
+            // Check Username
+            if (string.IsNullOrWhiteSpace(request.Username))
+                return BadRequest<bool>(_localizer[SharedResourcesKeys.nullValue]);
+
+            var existingUserNameUser = await _userManager.FindByNameAsync(request.Username);
+            if (existingUserNameUser != null && !request.Id.ToString().Equals(existingUserNameUser.Id, StringComparison.OrdinalIgnoreCase))
+            {
+                return BadRequest<bool>(_localizer[SharedResourcesKeys.UserNameAlreadyExist]);
+            }
+
+            // Cast request to user
+            var user = await _userManager.FindByIdAsync(request.Id.ToString());
+            if (user == null)
+            {
+                return NotFound<bool>(_localizer[SharedResourcesKeys.error]);
+            }
+
+            // Map updated fields from request to user entity
+            _mapper.Map(request, user);
+
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return Updated<bool>();
+            }
+            return ServerError<bool>(_localizer[SharedResourcesKeys.error]);
+
+
+
+        }
+
+        public async Task<Response<bool>> Handle(DeleteUserCommand request, CancellationToken cancellationToken)
+        {
+            if (request is null)
+                return BadRequest<bool>(_localizer[SharedResourcesKeys.nullValue]);
+
+            var user = await _userManager.FindByIdAsync(request.id);
+            if (user == null)
+                return NotFound<bool>(_localizer[SharedResourcesKeys.notFound]);
+
+            var result = await _userManager.DeleteAsync(user);
+            if (result.Succeeded)
+            {
+                return Deleted<bool>();
+            }
+            return BadRequest<bool>(_localizer[SharedResourcesKeys.DeleteField]);
+        }
+
+        public async Task<Response<bool>> Handle(ChangePasswordCommand request, CancellationToken cancellationToken)
+        {
+
+            if (request is null)
+                return BadRequest<bool>(_localizer[SharedResourcesKeys.nullValue]);
+
+            var user = await _userManager.FindByIdAsync(request.Id);
+            if (user == null)
+                return NotFound<bool>(_localizer[SharedResourcesKeys.notFound]);
+
+            var result = await _userManager.ChangePasswordAsync(user, request.OldPassword, request.NewPassword);
+            if (result.Succeeded)
+                return Success(true);
+
+            return BadRequest<bool>(_localizer[SharedResourcesKeys.FalseOldPassword]);
+
         }
 
 
