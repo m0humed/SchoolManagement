@@ -113,7 +113,6 @@ namespace SchoolManagement.Service.Services
 
         public async Task<JwtAuthenticationResult> CreateJWTToken(User user)
         {
-
             var jwtToken = await generateToken(user);
             var Token = new JwtSecurityTokenHandler().WriteToken(jwtToken);
             var RefreshToken = GetRefreshToken(user.UserName!);
@@ -164,9 +163,9 @@ namespace SchoolManagement.Service.Services
             return Task.FromResult(userRefreshToken);
         }
 
-        private Task<JwtSecurityToken> generateToken(User user)
+        private async Task<JwtSecurityToken> generateToken(User user)
         {
-            var claim = GetClaims(user);
+            var claim = await GetClaims(user);
             var jwtToken = new JwtSecurityToken(
                 issuer: _jwtSettings.issuer,
                 audience: _jwtSettings.audience,
@@ -176,20 +175,24 @@ namespace SchoolManagement.Service.Services
                                                                         Encoding.ASCII.GetBytes(_jwtSettings.secret)),
                                                                                           SecurityAlgorithms.HmacSha256Signature)
                 );
-            return Task.FromResult(jwtToken);
+            return jwtToken;
         }
 
 
 
-        private List<Claim> GetClaims(User user)
+        private async Task<List<Claim>> GetClaims(User user)
         {
+            var UserRoles = await _userManager.GetRolesAsync(user);
 
-            return new List<Claim>
+            var claims = new List<Claim>
             {
-                new Claim(nameof(User.UserName),user.UserName!),
+                new Claim(ClaimTypes.NameIdentifier,user.UserName!),
                 new Claim(nameof(User.ssn),user.ssn!),
-                new Claim(nameof(User.Email),user.Email!)
+                new Claim(ClaimTypes.Email,user.Email!)
             };
+            foreach (var role in UserRoles)
+                claims.Add(new Claim(ClaimTypes.Role, role));
+            return claims;
         }
 
         private RefreshToken GetRefreshToken(string Username)
