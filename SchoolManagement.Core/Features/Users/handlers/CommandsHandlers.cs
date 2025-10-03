@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Schoolmanagement.Domain.Entities.Identity;
+using Schoolmanagement.Domain.Enums;
 using SchoolManagement.Core.Bases;
 using SchoolManagement.Core.Features.Users.Commands;
 using SchoolManagement.Core.Resources;
@@ -72,7 +73,18 @@ namespace SchoolManagement.Core.Features.Users.handlers
                 mappedUser.Id = Guid.NewGuid().ToString();
                 var AddResult = await _userManager.CreateAsync(mappedUser, request.Password);
                 if (AddResult.Succeeded)
-                    return Created(true);
+                {
+                    var assignResult = await _userManager.AddToRoleAsync(mappedUser, Enum.GetName(RoleEnums.User)!);
+                    if (assignResult.Succeeded)
+                    {
+                        return Created(true);
+                    }
+                    else
+                    {
+                        return ServerError<bool>(_localizer[SharedResourcesKeys.AssignRoleError]);
+                    }
+
+                }
                 else
                     return ServerError<bool>(_localizer[SharedResourcesKeys.CanNotSave]);
             }

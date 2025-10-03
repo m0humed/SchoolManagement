@@ -15,6 +15,7 @@ namespace SchoolManagement.Service
             services.AddScoped<IClassSchadualService, ClassSchadualService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IAuthenticationService, AuthenticationService>();
+            services.AddScoped<IAutherizationService, AutherizationService>();
             return services;
         }
 

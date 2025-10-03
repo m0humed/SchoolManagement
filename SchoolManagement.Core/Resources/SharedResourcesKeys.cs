@@ -39,7 +39,6 @@
         public const string DeleteField = "DeleteField";
         public const string FalseOldPassword = "FalseOldPassword";
         public const string FalsePassword = "FalsePassword";
-
-
+        public const string AssignRoleError = "AssignRoleError";
     }
 }
