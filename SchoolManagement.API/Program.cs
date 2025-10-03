@@ -113,9 +113,6 @@ namespace SchoolManagement.API
 
             #endregion
 
-
-
-
             app.UseHttpsRedirection();
             // Enable CORS
             app.UseCors(MyAllowSpecificOrigins);
