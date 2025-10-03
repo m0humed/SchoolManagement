@@ -229,4 +229,7 @@
   <data name="FalsePassword" xml:space="preserve">
     <value>كلمة السر  خاطئه</value>
   </data>
+  <data name="AssignRoleError" xml:space="preserve">
+    <value>حصلت مشكله اثناء اعطاء الاوزونات</value>
+  </data>
 </root>

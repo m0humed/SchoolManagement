@@ -229,4 +229,7 @@
   <data name="FalsePassword" xml:space="preserve">
     <value>the password is false</value>
   </data>
+  <data name="AssignRoleError" xml:space="preserve">
+    <value>Assign Role Error Happend</value>
+  </data>
 </root>
