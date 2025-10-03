@@ -7,7 +7,7 @@ namespace SchoolManagement.Infrastructure.Data_Seeding
 {
     public static class UserSeeding
     {
-        public static async Task Create(UserManager<User> _userManager)
+        public static async Task SeedAsync(this UserManager<User> _userManager)
         {
             var userCounts = await _userManager.Users.CountAsync();
             if (userCounts <= 0)
