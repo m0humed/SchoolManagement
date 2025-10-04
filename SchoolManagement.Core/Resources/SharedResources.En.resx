@@ -229,4 +229,10 @@
   <data name="FalsePassword" xml:space="preserve">
     <value>the password is false</value>
   </data>
+  <data name="RoleAlreadyUsed" xml:space="preserve">
+    <value>several Users Has this Role</value>
+  </data>
+  <data name="RoleNotExist" xml:space="preserve">
+    <value>No role with this name</value>
+  </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Schoolmanagement.Domain.Entities.Identity;
 using SchoolManagement.Service.IServices;
 
 namespace SchoolManagement.Service.Services
@@ -7,12 +8,14 @@ namespace SchoolManagement.Service.Services
     {
         #region Fields
         private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<User> _userManager;
 
         #endregion
         #region Constructors
-        public AutherizationService(RoleManager<IdentityRole> roleManager)
+        public AutherizationService(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
         {
             _roleManager = roleManager;
+            _userManager = userManager;
         }
         #endregion
         public async Task AddAsync(IdentityRole entity)
@@ -24,9 +27,10 @@ namespace SchoolManagement.Service.Services
             }
         }
 
-        public Task DeleteAsync(string roleName)
+        public async Task DeleteAsync(string roleName)
         {
-            throw new NotImplementedException();
+            var role = await _roleManager.FindByNameAsync(roleName);
+            await _roleManager.DeleteAsync(role!);
         }
 
         public async Task<bool> ExistsAsync(string roleName)
@@ -44,9 +48,27 @@ namespace SchoolManagement.Service.Services
             throw new NotImplementedException();
         }
 
-        public Task UpdateAsync(IdentityRole entity)
+        public async Task<bool> IsExistByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            return await _roleManager.FindByIdAsync(id) != null;
+        }
+
+        public async Task<bool> RoleUsedAsync(string roleName)
+        {
+            var usersInRole = await _userManager.GetUsersInRoleAsync(roleName);
+            return usersInRole != null && usersInRole.Any();
+        }
+
+        public async Task UpdateAsync(IdentityRole entity)
+        {
+            var currentRole = await _roleManager.FindByIdAsync(entity.Id);
+            if (currentRole != null)
+            {
+                currentRole.Name = entity.Name;
+                var result = await _roleManager.UpdateAsync(currentRole);
+                if (!result.Succeeded)
+                { throw new Exception(); }
+            }
         }
     }
 }

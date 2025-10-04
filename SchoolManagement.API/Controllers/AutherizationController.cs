@@ -29,5 +29,19 @@ namespace SchoolManagement.API.Controllers
             var result = await _mediator.Send(command);
             return NewResult(result);
         }
+
+        [HttpPut("Update")]
+        public async Task<IActionResult> UpdateRole([FromQuery] UpdateRoleCommand command)
+        {
+            var result = await _mediator.Send(command);
+            return NewResult(result);
+        }
+
+        [HttpDelete("Delete/{Name}")]
+        public async Task<IActionResult> DeleteRole([FromRoute] string Name)
+        {
+            var result = await _mediator.Send(new DeleteRoleCommand() { RoleName = Name });
+            return NewResult(result);
+        }
     }
 }
