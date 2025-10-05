@@ -7,6 +7,8 @@ namespace SchoolManagement.Core.Mapping.Autherization
         public AuthorizeProfile()
         {
             UpdateRole();
+            GetRoleListMapping();
+            GetRoleByIdMapper();
         }
     }
 }

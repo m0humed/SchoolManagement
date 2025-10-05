@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Schoolmanagement.Domain.Entities.Identity;
 using SchoolManagement.Service.IServices;
 
@@ -38,14 +39,14 @@ namespace SchoolManagement.Service.Services
             return await _roleManager.RoleExistsAsync(roleName);
         }
 
-        public Task<IEnumerable<IdentityRole>> GetAllAsync()
+        public async Task<IEnumerable<IdentityRole>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _roleManager.Roles.ToListAsync();
         }
 
-        public Task<IdentityRole> GetByIdAsync(string id)
+        public async Task<IdentityRole> GetByIdAsync(string id)
         {
-            throw new NotImplementedException();
+            return (await _roleManager.FindByIdAsync(id))!;
         }
 
         public async Task<bool> IsExistByIdAsync(string id)

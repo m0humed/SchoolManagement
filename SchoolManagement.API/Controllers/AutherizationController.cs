@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SchoolManagement.API.Base;
 using SchoolManagement.Core.Features.Autherization.Commands;
+using SchoolManagement.Core.Features.Autherization.Queries;
 
 namespace SchoolManagement.API.Controllers
 {
@@ -41,6 +42,20 @@ namespace SchoolManagement.API.Controllers
         public async Task<IActionResult> DeleteRole([FromRoute] string Name)
         {
             var result = await _mediator.Send(new DeleteRoleCommand() { RoleName = Name });
+            return NewResult(result);
+        }
+
+        [HttpGet("GetAllRoles")]
+        public async Task<IActionResult> GetAllRoles()
+        {
+            var result = await _mediator.Send(new GetRolesListQuery());
+            return NewResult(result);
+        }
+
+        [HttpGet("GetRoleById/{id}")]
+        public async Task<IActionResult> GetRoleById(string id)
+        {
+            var result = await _mediator.Send(new GetRoleByIdQuery() { Id = id });
             return NewResult(result);
         }
     }
