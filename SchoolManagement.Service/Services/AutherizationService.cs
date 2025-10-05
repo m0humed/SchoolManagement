@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using Schoolmanagement.Domain.Dtos;
 using Schoolmanagement.Domain.Entities.Identity;
+using SchoolManagement.Infrastructure.Data;
 using SchoolManagement.Service.IServices;
 
 namespace SchoolManagement.Service.Services
@@ -11,13 +12,15 @@ namespace SchoolManagement.Service.Services
         #region Fields
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly UserManager<User> _userManager;
+        private readonly ApplicationDbContext _context;
 
         #endregion
         #region Constructors
-        public AutherizationService(RoleManager<IdentityRole> roleManager, UserManager<User> userManager)
+        public AutherizationService(RoleManager<IdentityRole> roleManager, UserManager<User> userManager, ApplicationDbContext context)
         {
             _roleManager = roleManager;
             _userManager = userManager;
+            _context = context;
         }
         #endregion
         public async Task AddAsync(IdentityRole entity)
@@ -96,6 +99,45 @@ namespace SchoolManagement.Service.Services
                 if (!result.Succeeded)
                 { throw new Exception(); }
             }
+        }
+
+        public async Task<bool> UpdateUserRolesAsync(UpdateUserRoleRequest request)
+        {
+
+
+            // Start a new transaction
+            using (var transaction = await _context.Database.BeginTransactionAsync())
+            {
+                try
+                {
+                    // Get User
+                    var user = await _userManager.FindByNameAsync(request.UserName);
+                    // Get Current Roles of user
+                    var roles = await _userManager.GetRolesAsync(user!);
+                    //Delete User Roles 
+                    var rDeleted = await _userManager.RemoveFromRolesAsync(user!, roles);
+                    if (!rDeleted.Succeeded)
+                        return false;
+                    // create list of New Roles
+                    var newRoles = request.UserRoles.Where(x => x.HasRole == true).Select(s => s.RoleName).ToList();
+                    var rAdd = await _userManager.AddToRolesAsync(user!, newRoles);
+                    if (!rAdd.Succeeded)
+                    {
+                        await transaction.RollbackAsync();
+                        return false;
+                    }
+                    // Commit transaction if all succeeded
+                    await transaction.CommitAsync();
+                    return true;
+                }
+                catch (Exception)
+                {
+                    // Rollback transaction on error
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+            }
+
         }
     }
 }

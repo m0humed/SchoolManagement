@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Schoolmanagement.Domain.Dtos;
 using SchoolManagement.API.Base;
 using SchoolManagement.Core.Features.Autherization.Commands;
 using SchoolManagement.Core.Features.Autherization.Queries;
@@ -65,5 +66,13 @@ namespace SchoolManagement.API.Controllers
             var result = await _mediator.Send(new GetUserAndRolesQuery() { UserName = username });
             return NewResult(result);
         }
+
+        [HttpPut("UpdateUserRoles")]
+        public async Task<IActionResult> UpdateUserRole([FromBody] UpdateUserRoleRequest newRoles)
+        {
+            var result = await _mediator.Send(new UpdateUserRolesCommand(newRoles));
+            return NewResult(result);
+        }
+
     }
 }

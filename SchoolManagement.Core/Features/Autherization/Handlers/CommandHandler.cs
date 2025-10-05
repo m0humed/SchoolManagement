@@ -11,7 +11,8 @@ namespace SchoolManagement.Core.Features.Autherization.Handlers
 {
     public class CommandHandler : ResponseHandler, IRequestHandler<AddRoleCommand, Response<bool>>,
                                                    IRequestHandler<UpdateRoleCommand, Response<bool>>,
-                                                   IRequestHandler<DeleteRoleCommand, Response<bool>>
+                                                   IRequestHandler<DeleteRoleCommand, Response<bool>>,
+                                                   IRequestHandler<UpdateUserRolesCommand, Response<bool>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _localizer;
@@ -74,6 +75,15 @@ namespace SchoolManagement.Core.Features.Autherization.Handlers
             {
                 return ServerError<bool>();
             }
+        }
+
+        public async Task<Response<bool>> Handle(UpdateUserRolesCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _autherizationService.UpdateUserRolesAsync(request.UpdateUserRoleRequest);
+            if (result == true)
+                return Success(result);
+            else
+                return BadRequest<bool>();
         }
     }
 }

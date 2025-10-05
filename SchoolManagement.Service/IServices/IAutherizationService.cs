@@ -8,5 +8,6 @@ namespace SchoolManagement.Service.IServices
         Task<List<UserRoles>> GetRolesForUserAsync(string userName);
         Task<bool> IsExistByIdAsync(string id);
         Task<bool> RoleUsedAsync(string RoleName);
+        Task<bool> UpdateUserRolesAsync(UpdateUserRoleRequest request);
     }
 }
