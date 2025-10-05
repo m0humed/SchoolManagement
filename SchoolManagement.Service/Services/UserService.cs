@@ -42,6 +42,11 @@ namespace SchoolManagement.Service.Services
             return _userRepository.GetByIdAsync(id);
         }
 
+        public async Task<bool> IsUserNameExistAsync(string UserName)
+        {
+            return await _userRepository.GetByNameAsync(UserName) != null;
+        }
+
         public async Task<User?> GetUserByPhoneNumber(string phoneNumber)
         {
             return await _userRepository.GetUserByPhoneNumber(phoneNumber);

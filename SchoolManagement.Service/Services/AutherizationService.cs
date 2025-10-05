@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Schoolmanagement.Domain.Dtos;
 using Schoolmanagement.Domain.Entities.Identity;
 using SchoolManagement.Service.IServices;
 
@@ -47,6 +48,31 @@ namespace SchoolManagement.Service.Services
         public async Task<IdentityRole> GetByIdAsync(string id)
         {
             return (await _roleManager.FindByIdAsync(id))!;
+        }
+
+        public async Task<List<UserRoles>> GetRolesForUserAsync(string userName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            var userRoleNames = await _userManager.GetRolesAsync(user!);
+
+            // Get all roles from the RoleManager
+            var allRoles = await _roleManager.Roles.ToListAsync();
+
+            var rList = new List<UserRoles>();
+            foreach (var roleName in userRoleNames)
+            {
+                var role = allRoles.FirstOrDefault(r => r.Name == roleName);
+                if (role != null)
+                {
+                    rList.Add(new UserRoles
+                    {
+                        RoleId = role.Id,
+                        RoleName = role.Name!,
+                        HasRole = true
+                    });
+                }
+            }
+            return rList;
         }
 
         public async Task<bool> IsExistByIdAsync(string id)

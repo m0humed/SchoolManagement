@@ -58,5 +58,12 @@ namespace SchoolManagement.API.Controllers
             var result = await _mediator.Send(new GetRoleByIdQuery() { Id = id });
             return NewResult(result);
         }
+
+        [HttpGet("GetRolesForUser/{username}")]
+        public async Task<IActionResult> GetRolesForUser(string username)
+        {
+            var result = await _mediator.Send(new GetUserAndRolesQuery() { UserName = username });
+            return NewResult(result);
+        }
     }
 }
