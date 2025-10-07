@@ -1,4 +1,4 @@
-﻿namespace Schoolmanagement.Domain.Dtos
+﻿namespace Schoolmanagement.Domain.Results
 {
     public class GetUserAndHisRolesResult
     {

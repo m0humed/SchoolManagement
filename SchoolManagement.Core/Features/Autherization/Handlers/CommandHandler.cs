@@ -12,13 +12,15 @@ namespace SchoolManagement.Core.Features.Autherization.Handlers
     public class CommandHandler : ResponseHandler, IRequestHandler<AddRoleCommand, Response<bool>>,
                                                    IRequestHandler<UpdateRoleCommand, Response<bool>>,
                                                    IRequestHandler<DeleteRoleCommand, Response<bool>>,
-                                                   IRequestHandler<UpdateUserRolesCommand, Response<bool>>
+                                                   IRequestHandler<UpdateUserRolesCommand, Response<bool>>,
+                                                   IRequestHandler<UpdateUserClaimsCommand, Response<bool>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _localizer;
         private readonly IAutherizationService _autherizationService;
         private readonly IMapper _mapper;
         #endregion
+        #region Constructors
         public CommandHandler(IStringLocalizer<SharedResources> localizer,
                                 IAutherizationService autherizationService, IMapper mapper) : base(localizer)
         {
@@ -26,7 +28,8 @@ namespace SchoolManagement.Core.Features.Autherization.Handlers
             _autherizationService = autherizationService;
             _mapper = mapper;
         }
-
+        #endregion
+        #region Handlers
         public async Task<Response<bool>> Handle(AddRoleCommand request, CancellationToken cancellationToken)
         {
             try
@@ -85,5 +88,13 @@ namespace SchoolManagement.Core.Features.Autherization.Handlers
             else
                 return BadRequest<bool>();
         }
+
+        public async Task<Response<bool>> Handle(UpdateUserClaimsCommand request, CancellationToken cancellationToken)
+        {
+            var result = await _autherizationService.UpdateClaimsForUserAsync(request);
+            if (result) return Success(result);
+            else return BadRequest<bool>();
+        }
+        #endregion
     }
 }

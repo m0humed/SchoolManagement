@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using Microsoft.Extensions.Localization;
-using Schoolmanagement.Domain.Dtos;
+using Schoolmanagement.Domain.Results;
 using SchoolManagement.Core.Bases;
 using SchoolManagement.Core.Features.Autherization.Queries;
 using SchoolManagement.Core.Features.Autherization.Results;
@@ -12,6 +12,7 @@ namespace SchoolManagement.Core.Features.Autherization.Handlers
     public class QueryHandlers : ResponseHandler, IRequestHandler<GetRolesListQuery, Response<List<RolesListResult>>>
                                                 , IRequestHandler<GetRoleByIdQuery, Response<GetRoleByIdResult>>
                                                 , IRequestHandler<GetUserAndRolesQuery, Response<GetUserAndHisRolesResult>>
+                                                , IRequestHandler<GetUserClaimsQuery, Response<ManageUserClaimsResult>>
     {
         #region Fields
         private readonly IStringLocalizer<SharedResources> _localizer;
@@ -85,7 +86,7 @@ namespace SchoolManagement.Core.Features.Autherization.Handlers
                     resultRoles.Add(new UserRoles
                     {
                         RoleId = role.Id,
-                        RoleName = role.Name,
+                        RoleName = role.Name!,
                         HasRole = false
                     });
                 }
@@ -93,6 +94,12 @@ namespace SchoolManagement.Core.Features.Autherization.Handlers
 
             getUserAndHisRolesResult.UserRoles = resultRoles;
             return Success(getUserAndHisRolesResult);
+        }
+
+        public async Task<Response<ManageUserClaimsResult>> Handle(GetUserClaimsQuery request, CancellationToken cancellationToken)
+        {
+            var result = await _autherizationService.GetClaimsForUserAsync(request.UserName);
+            return Success(result);
         }
 
         #endregion

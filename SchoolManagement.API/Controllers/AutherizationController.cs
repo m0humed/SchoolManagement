@@ -74,5 +74,23 @@ namespace SchoolManagement.API.Controllers
             return NewResult(result);
         }
 
+        [HttpGet("ManageUserClaims/{userName}")]
+        public async Task<IActionResult> ManageUserClaims([FromRoute] string userName)
+        {
+            var response = await _mediator.Send(new GetUserClaimsQuery() { UserName = userName });
+            return NewResult(response);
+        }
+        [HttpPut("UpdateUserClaims")]
+        public async Task<IActionResult> UpdateUserClaims([FromBody] UpdateUserClaimsRequest userClaimsRequest)
+        {
+            var response = await _mediator.Send(new UpdateUserClaimsCommand()
+            {
+                UserName = userClaimsRequest.UserName
+                                                                                ,
+                userClaims = userClaimsRequest.userClaims
+            });
+            return NewResult(response);
+        }
+
     }
 }

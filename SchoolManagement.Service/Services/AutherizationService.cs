@@ -2,8 +2,12 @@
 using Microsoft.EntityFrameworkCore;
 using Schoolmanagement.Domain.Dtos;
 using Schoolmanagement.Domain.Entities.Identity;
+using Schoolmanagement.Domain.Helper;
+using Schoolmanagement.Domain.Results;
 using SchoolManagement.Infrastructure.Data;
 using SchoolManagement.Service.IServices;
+using System.Security.Claims;
+
 
 namespace SchoolManagement.Service.Services
 {
@@ -51,6 +55,34 @@ namespace SchoolManagement.Service.Services
         public async Task<IdentityRole> GetByIdAsync(string id)
         {
             return (await _roleManager.FindByIdAsync(id))!;
+        }
+
+        public async Task<ManageUserClaimsResult> GetClaimsForUserAsync(string userName)
+        {
+            var user = await _userManager.FindByNameAsync(userName);
+            var response = new ManageUserClaimsResult();
+            var usercliamsList = new List<UserClaims>();
+            response.UserName = user!.Id;
+            //Get USer Claims
+            var userClaims = await _userManager.GetClaimsAsync(user!); //edit
+                                                                       //create edit get print
+            foreach (var claim in ClaimStore.claims)
+            {
+                var userclaim = new UserClaims();
+                userclaim.Type = claim.Type;
+                if (userClaims.Any(x => x.Type == claim.Type))
+                {
+                    userclaim.Value = true;
+                }
+                else
+                {
+                    userclaim.Value = false;
+                }
+                usercliamsList.Add(userclaim);
+            }
+            response.userClaims = usercliamsList;
+            //return Result
+            return response;
         }
 
         public async Task<List<UserRoles>> GetRolesForUserAsync(string userName)
@@ -101,10 +133,47 @@ namespace SchoolManagement.Service.Services
             }
         }
 
+        public async Task<bool> UpdateClaimsForUserAsync(UpdateUserClaimsRequest request)
+        {
+            using (var transaction = await _context.Database.BeginTransactionAsync())
+            {
+                try
+                {
+                    var user = await _userManager.FindByNameAsync(request.UserName);
+                    var oldClaims = await _userManager.GetClaimsAsync(user!);
+                    var removedClaims = await _userManager.RemoveClaimsAsync(user!, oldClaims);
+                    if (!removedClaims.Succeeded)
+                    {
+                        return false;
+                    }
+                    var newClaims = new List<Claim>();
+                    foreach (var claim in request.userClaims)
+                    {
+                        if (claim.Value == true)
+                            newClaims.Add
+                                (
+                                    new Claim(claim.Type, claim.Value.ToString())
+                                );
+                    }
+                    var added = await _userManager.AddClaimsAsync(user!, newClaims);
+                    if (!added.Succeeded)
+                    {
+                        await transaction.RollbackAsync();
+                        return false;
+                    }
+                    await transaction.CommitAsync();
+                    return true;
+                }
+                catch
+                {
+                    await transaction.RollbackAsync();
+                    return false;
+                }
+            }
+        }
+
         public async Task<bool> UpdateUserRolesAsync(UpdateUserRoleRequest request)
         {
-
-
             // Start a new transaction
             using (var transaction = await _context.Database.BeginTransactionAsync())
             {
@@ -139,5 +208,6 @@ namespace SchoolManagement.Service.Services
             }
 
         }
+
     }
 }
