@@ -10,7 +10,7 @@ namespace SchoolManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "SuperAdmin")]
     public class AutherizationController : AppController
     {
 

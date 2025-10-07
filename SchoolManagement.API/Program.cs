@@ -1,17 +1,20 @@
 ﻿
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using Schoolmanagement.Domain.Entities.Identity;
 using SchoolManagement.Core;
 using SchoolManagement.Core.Middleware;
 using SchoolManagement.Infrastructure;
 using SchoolManagement.Infrastructure.Data;
+using SchoolManagement.Infrastructure.Data_Seeding;
 using SchoolManagement.Service;
 using System.Globalization;
 namespace SchoolManagement.API
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static async Task Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
 
@@ -92,6 +95,16 @@ namespace SchoolManagement.API
 
             var app = builder.Build();
 
+            #region Seeding Data
+            using (var Scope = app.Services.CreateScope())
+            {
+                var userManager = Scope.ServiceProvider.GetRequiredService<UserManager<User>>();
+                var roleManager = Scope.ServiceProvider.GetRequiredService<RoleManager<IdentityRole>>();
+                await roleManager.SeedAsync();
+                await userManager.SeedAsync();
+            }
+            #endregion
+
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
@@ -112,9 +125,6 @@ namespace SchoolManagement.API
             app.UseRequestLocalization(localizationOptions);
 
             #endregion
-
-
-
 
             app.UseHttpsRedirection();
             // Enable CORS
