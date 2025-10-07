@@ -15,6 +15,12 @@ namespace SchoolManagement.Infrastructure.Repositories
             _context = context;
         }
 
+        public async Task<User?> GetByNameAsync(string userName)
+        {
+            return await _context.Users
+               .FirstOrDefaultAsync(x => x.UserName != null && x.UserName.Equals(userName));
+        }
+
         public async Task<User?> GetUserByPhoneNumber(string phoneNumber)
         {
             return await _context.Users

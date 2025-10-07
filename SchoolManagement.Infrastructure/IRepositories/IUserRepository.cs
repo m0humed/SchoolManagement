@@ -6,6 +6,6 @@ namespace SchoolManagement.Infrastructure.IRepositories
     {
         Task<User?> GetUserBySSNAsync(string ssn);
         Task<User?> GetUserByPhoneNumber(string phoneNumber);
-
+        Task<User?> GetByNameAsync(string userName);
     }
 }

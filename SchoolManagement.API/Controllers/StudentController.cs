@@ -12,7 +12,7 @@ namespace SchoolManagement.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    [Authorize(Roles = "Admin")]
     public class StudentController : AppController
     {
         #region fields
@@ -30,6 +30,7 @@ namespace SchoolManagement.API.Controllers
         #region Actions
 
         [HttpPost("AddStudent")]
+        //[Authorize(Policy = "Create Student")]
         public async Task<IActionResult> addStudent([FromBody] AddStudentCommand command)
         {
             if (command == null)

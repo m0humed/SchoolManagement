@@ -229,7 +229,10 @@
   <data name="FalsePassword" xml:space="preserve">
     <value>كلمة السر  خاطئه</value>
   </data>
-  <data name="AssignRoleError" xml:space="preserve">
-    <value>حصلت مشكله اثناء اعطاء الاوزونات</value>
+  <data name="RoleAlreadyUsed" xml:space="preserve">
+    <value>يجد مجموعه من المستخدمين لديهم هذه الصلاحيه</value>
+  </data>
+  <data name="RoleNotExist" xml:space="preserve">
+    <value>لا يوجد قاعده بهذا الاسم</value>
   </data>
 </root>

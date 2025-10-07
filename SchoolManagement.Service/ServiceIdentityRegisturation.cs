@@ -103,6 +103,23 @@ namespace SchoolManagement.Service
            });
             });
 
+            // Add Ploices to Use UserClaims 
+            Services.AddAuthorization(
+                    option =>
+                    {
+                        option.AddPolicy("Create Student",
+                            policy => policy.RequireClaim("Create Student", "true")
+                            );
+                        option.AddPolicy("Update Student",
+                            policy => policy.RequireClaim("Update Student", "true")
+                            );
+                        option.AddPolicy("Delete Student",
+                            policy => policy.RequireClaim("Delete Student", "true")
+                            );
+
+                    }
+                );
+
             return Services;
         }
     }
