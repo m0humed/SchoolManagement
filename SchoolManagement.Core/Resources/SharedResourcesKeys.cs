@@ -41,6 +41,7 @@
         public const string FalsePassword = "FalsePassword";
         public const string RoleAlreadyUsed = "RoleAlreadyUsed";
         public const string RoleNotExist = "RoleNotExist";
+        public const string AssignRoleError = "AssignRoleError";
 
 
     }
