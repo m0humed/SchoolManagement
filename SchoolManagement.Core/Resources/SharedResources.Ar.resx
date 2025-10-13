@@ -235,4 +235,7 @@
   <data name="RoleNotExist" xml:space="preserve">
     <value>لا يوجد قاعده بهذا الاسم</value>
   </data>
+  <data name="NotEmail" xml:space="preserve">
+    <value>عنوان بريد الكتروني غير صحيح</value>
+  </data>
 </root>

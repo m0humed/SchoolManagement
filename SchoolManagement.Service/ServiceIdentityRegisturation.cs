@@ -44,10 +44,14 @@ namespace SchoolManagement.Service
                 ).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 
 
-            //Bind JWT Settings
+            //Bind JWT Settings & Email Settings
             var JwtSettings = new JwtSettings();
             configuration.GetSection(nameof(JwtSettings)).Bind(JwtSettings);
             Services.AddSingleton(JwtSettings);
+
+            var EmailSettings = new EmailSettings();
+            configuration.GetSection(nameof(EmailSettings)).Bind(EmailSettings);
+            Services.AddSingleton(EmailSettings);
 
             // Add Authentication
             Services.AddAuthentication(x =>

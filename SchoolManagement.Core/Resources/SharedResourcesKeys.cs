@@ -42,6 +42,7 @@
         public const string RoleAlreadyUsed = "RoleAlreadyUsed";
         public const string RoleNotExist = "RoleNotExist";
         public const string AssignRoleError = "AssignRoleError";
+        public const string NotEmail = "NotEmail";
 
 
     }
