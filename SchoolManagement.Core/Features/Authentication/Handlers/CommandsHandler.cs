@@ -46,6 +46,7 @@ namespace SchoolManagement.Core.Features.Authentication.Handlers
 
             var token = await _authenticationService.CreateJWTToken(user);
 
+
             return Success(token);
         }
 

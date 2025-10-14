@@ -238,4 +238,10 @@
   <data name="NotEmail" xml:space="preserve">
     <value>عنوان بريد الكتروني غير صحيح</value>
   </data>
+  <data name="CanNotGUrl" xml:space="preserve">
+    <value>لا يمك ن انشاء رابط التاكيد</value>
+  </data>
+  <data name="CanNotSendUrl" xml:space="preserve">
+    <value>حصلت مشكلة اثناء ارسال كود التعريف</value>
+  </data>
 </root>

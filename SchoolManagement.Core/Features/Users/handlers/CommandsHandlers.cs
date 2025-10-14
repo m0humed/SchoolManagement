@@ -7,6 +7,7 @@ using Schoolmanagement.Domain.Enums;
 using SchoolManagement.Core.Bases;
 using SchoolManagement.Core.Features.Users.Commands;
 using SchoolManagement.Core.Resources;
+using SchoolManagement.Service.IServices;
 
 namespace SchoolManagement.Core.Features.Users.handlers
 {
@@ -20,14 +21,18 @@ namespace SchoolManagement.Core.Features.Users.handlers
         private readonly IStringLocalizer<SharedResources> _localizer;
         private readonly UserManager<User> _userManager;
         private readonly IMapper _mapper;
+        private readonly IApplicationUserService _applicationUserService;
+        private readonly IEmailService _emailService;
         #endregion
 
         #region Constructors
-        public CommandsHandlers(IStringLocalizer<SharedResources> localizer, UserManager<User> userManager, IMapper mapper) : base(localizer)
+        public CommandsHandlers(IStringLocalizer<SharedResources> localizer, UserManager<User> userManager, IMapper mapper, IApplicationUserService applicationUserService, IEmailService emailService) : base(localizer)
         {
             _localizer = localizer;
             _userManager = userManager;
             _mapper = mapper;
+            _applicationUserService = applicationUserService;
+            _emailService = emailService;
         }
         #endregion
 
@@ -58,15 +63,6 @@ namespace SchoolManagement.Core.Features.Users.handlers
                 return BadRequest<bool>(_localizer[SharedResourcesKeys.UserNameAlreadyExist]);
             }
 
-            // Should Check os SSN
-            //var SSN = await _userManager.FindByNameAsync(request.UserName);
-            //if (UUserName != null)
-            //{
-            //    return BadRequest<bool>(_localizer[SharedResourcesKeys.UserNameAlreadyExist]);
-            //}
-
-            // Add User
-
             var mappedUser = _mapper.Map<User>(request);
             if (mappedUser != null)
             {
@@ -77,6 +73,12 @@ namespace SchoolManagement.Core.Features.Users.handlers
                     var assignResult = await _userManager.AddToRoleAsync(mappedUser, Enum.GetName(RoleEnums.User)!);
                     if (assignResult.Succeeded)
                     {
+                        var createdUrl = await _applicationUserService.GenerateConfermationUrlAsync(mappedUser);
+                        if (!createdUrl.Success)
+                            return ServerError<bool>(_localizer[SharedResourcesKeys.CanNotGUrl]);
+                        var SendUrlResult = await _emailService.SendVerifyurlByEmailAsync(mappedUser.Email!, createdUrl.Message);
+                        if (!SendUrlResult.Success)
+                            return ServerError<bool>(_localizer[SharedResourcesKeys.CanNotSendUrl]);
                         return Created(true);
                     }
                     else
@@ -87,6 +89,7 @@ namespace SchoolManagement.Core.Features.Users.handlers
                 }
                 else
                     return ServerError<bool>(_localizer[SharedResourcesKeys.CanNotSave]);
+
             }
             return ServerError<bool>(_localizer[SharedResourcesKeys.UnValidCast]);
         }

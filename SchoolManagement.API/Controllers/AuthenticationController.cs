@@ -43,6 +43,14 @@ namespace SchoolManagement.API.Controllers
             return NewResult(tokent);
         }
 
+        [HttpGet("VerifyEmail")]
+        public async Task<IActionResult> VerifyEmail([FromQuery] VerifyEmailQuery command)
+        {
+            var tokent = await _mediator.Send(command);
+
+            return NewResult(tokent);
+        }
+
         #endregion
 
     }

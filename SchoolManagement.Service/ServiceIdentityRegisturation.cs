@@ -32,7 +32,7 @@ namespace SchoolManagement.Service
                     options.Lockout.MaxFailedAccessAttempts = 5;
                     options.Lockout.AllowedForNewUsers = true;
 
-                    options.SignIn.RequireConfirmedEmail = false;
+                    options.SignIn.RequireConfirmedEmail = true;
                     options.SignIn.RequireConfirmedPhoneNumber = false;
                     options.SignIn.RequireConfirmedAccount = false;
 

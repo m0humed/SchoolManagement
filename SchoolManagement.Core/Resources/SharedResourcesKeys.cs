@@ -43,6 +43,8 @@
         public const string RoleNotExist = "RoleNotExist";
         public const string AssignRoleError = "AssignRoleError";
         public const string NotEmail = "NotEmail";
+        public const string CanNotGUrl = "CanNotGUrl";
+        public const string CanNotSendUrl = "CanNotSendUrl";
 
 
     }

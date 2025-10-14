@@ -238,4 +238,10 @@
   <data name="NotEmail" xml:space="preserve">
     <value>Not Valid Email</value>
   </data>
+  <data name="CanNotGUrl" xml:space="preserve">
+    <value>Can't generate Verify Email Url</value>
+  </data>
+  <data name="CanNotSendUrl" xml:space="preserve">
+    <value>We have a problem  at send Server</value>
+  </data>
 </root>
